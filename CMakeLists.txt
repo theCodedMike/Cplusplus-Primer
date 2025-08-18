@@ -49,4 +49,10 @@ add_executable(C___Primer main.cpp
         chapter_2/test_2_36.cpp
         chapter_2/test_2_37.cpp
         chapter_2/test_2_38.cpp
-        )
+
+        chapter_3/listing_using.cpp
+        chapter_3/listing_string.cpp
+        chapter_3/test_3_2.cpp
+        chapter_3/test_3_4.cpp
+        chapter_3/test_3_5.cpp
+)
