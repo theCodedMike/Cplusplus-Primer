@@ -13,12 +13,16 @@ void cin_string();
 void getline_string();
 void string_cmp();
 void string_add();
+void string_range();
+void string_index();
 
 int main(int argc, char *argv[]) {
     string s1; // 默认初始化，s1是一个空字符串
     if (s1 == "") {
         cout << "s1 is empty string, not nullptr" << endl; // 会被执行
     }
+    cout << s1[0] << static_cast<int>(s1[0]) << endl; // 0
+    cout << "??:" << s1[1] << endl; // 程序不会奔溃
     string s2(s1); // s2是s1的副本    直接初始化
     string s3 = s1; // s3是s1的副本，等价于s2(s1)   拷贝初始化
     string s4("value"); // s4是value的副本，除了字面值最后的那个空字符外
@@ -27,6 +31,9 @@ int main(int argc, char *argv[]) {
     cout << s4 << endl; // value
     cout << s5 << endl; // value
     cout << s6 << endl; // xxxxx
+    cout << s5[0] << static_cast<int>(s5[0]) << endl; // v 118
+    cout << s5[5] << static_cast<int>(s5[5]) << endl; // ? 0
+    cout << s5[6] << endl; // 不会奔溃
 
     string name = "1王祖安ha";
     const unsigned int size = name.size();
@@ -38,8 +45,10 @@ int main(int argc, char *argv[]) {
 
     //cin_string();
     //getline_string();
-    string_cmp();
+    //string_cmp();
     //string_add();
+    //string_range();
+    //string_index();
 }
 
 // 按单词读取
@@ -81,4 +90,31 @@ void string_add() {
     //string s4 = "what" + "the"; // ❌ +号的两侧至少有一个是string对象
     //string s5 = "hello" + ", " + s1; // ❌
     string s6 = "what" + s1;
+}
+
+void string_range() {
+    string s1 = "what the fuck";
+    for (char ch: s1) {
+        cout << ch << endl;
+    }
+
+    string s2 = "what";
+    for (auto &ch: s2) {
+        ch = toupper(ch);
+    }
+    cout << s2 << endl; // WHAT
+}
+
+void string_index() {
+    const string hexdigits = "0123456789ABCDEF";
+    cout << "Enter a series of numbers between 0 and 15"
+    << " separated by spaces. Hit ENTER when finished: "
+    <<endl;
+    string result;
+    string::size_type n;
+    while (cin >> n)
+        if (n < hexdigits.size())
+            result += hexdigits[n];
+
+    cout << "Your hex number is " << result << endl;
 }

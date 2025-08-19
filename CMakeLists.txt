@@ -55,4 +55,10 @@ add_executable(C___Primer main.cpp
         chapter_3/test_3_2.cpp
         chapter_3/test_3_4.cpp
         chapter_3/test_3_5.cpp
+        chapter_3/test_3_6.cpp
+        chapter_3/test_3_7.cpp
+        chapter_3/test_3_8.cpp
+        chapter_3/test_3_9.cpp
+        chapter_3/test_3_10.cpp
+        chapter_3/test_3_11.cpp
 )
