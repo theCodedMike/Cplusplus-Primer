@@ -61,4 +61,7 @@ add_executable(C___Primer main.cpp
         chapter_3/test_3_9.cpp
         chapter_3/test_3_10.cpp
         chapter_3/test_3_11.cpp
+        chapter_3/listing_vector.cpp
+        chapter_3/test_3_14.cpp
+        chapter_3/test_3_15.cpp
 )
