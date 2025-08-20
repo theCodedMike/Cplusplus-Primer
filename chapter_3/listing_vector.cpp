@@ -7,16 +7,21 @@
 using std::vector;
 using std::cout;
 using std::endl;
+using std::cin;
 
 void initialize();
-
 void push_back();
+void modify_vector();
+void count_grade();
 
 int main(int argc, char *argv[]) {
     // 初始化
     //initialize();
     // 添加
-    push_back();
+    //push_back();
+    // 其他操作
+    //modify_vector();
+    count_grade();
 }
 
 void initialize() {
@@ -45,4 +50,31 @@ void push_back() {
         if (num > 0 && num % 10 == 9)
             cout << endl;
     }
+}
+
+void modify_vector() {
+    vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    for (int & num: nums) {
+        num *= num;
+    }
+    for (int num: nums) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    vector<int> v1 = {1, 2};
+    vector<int> v2 = {1, 2, 3};
+    vector<int> v3 = {2, 1};
+    cout << (v2 > v1) << endl; // 1
+    cout << (v3 > v2) << endl; // 1
+}
+
+// 以10分为一个分数段统计成绩的数量
+// 0~9 10~19 20~29 30~39 40~49 50~59 60~69 70~79 80~89 90~99 100
+void count_grade() {
+    vector<unsigned> scores(11, 0);
+    unsigned grade;
+    while (cin >> grade)
+        if (grade <= 100)
+            scores[grade / 10]++;
 }

@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(C___Primer main.cpp
         include/Sales_item.h
         include/Sales_data.h
+        include/Utils.h
 
         chapter_1/listing_io.cpp
         chapter_1/listing_comment.cpp
@@ -52,6 +53,7 @@ add_executable(C___Primer main.cpp
 
         chapter_3/listing_using.cpp
         chapter_3/listing_string.cpp
+        chapter_3/listing_vector.cpp
         chapter_3/test_3_2.cpp
         chapter_3/test_3_4.cpp
         chapter_3/test_3_5.cpp
@@ -61,7 +63,11 @@ add_executable(C___Primer main.cpp
         chapter_3/test_3_9.cpp
         chapter_3/test_3_10.cpp
         chapter_3/test_3_11.cpp
-        chapter_3/listing_vector.cpp
         chapter_3/test_3_14.cpp
         chapter_3/test_3_15.cpp
+        chapter_3/test_3_16.cpp
+        chapter_3/test_3_17.cpp
+        chapter_3/test_3_19.cpp
+        chapter_3/test_3_20.cpp
+
 )
