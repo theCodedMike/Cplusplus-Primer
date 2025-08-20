@@ -69,5 +69,10 @@ add_executable(C___Primer main.cpp
         chapter_3/test_3_17.cpp
         chapter_3/test_3_19.cpp
         chapter_3/test_3_20.cpp
+        chapter_3/listing_iterator.cpp
+        chapter_3/test_3_23.cpp
+        chapter_3/test_3_22.cpp
+        chapter_3/test_3_24.cpp
+        chapter_3/test_3_25.cpp
 
 )
