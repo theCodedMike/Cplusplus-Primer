@@ -74,5 +74,11 @@ add_executable(C___Primer main.cpp
         chapter_3/test_3_22.cpp
         chapter_3/test_3_24.cpp
         chapter_3/test_3_25.cpp
+        chapter_3/listing_array.cpp
+        chapter_3/test_3_28.cpp
+        chapter_3/test_3_31.cpp
+        chapter_3/test_3_32.cpp
+        chapter_3/test_3_35.cpp
+        chapter_3/test_3_36.cpp
 
 )

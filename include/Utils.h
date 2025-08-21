@@ -11,13 +11,13 @@
 template<typename Container>
 void print_collection(const Container& container) {
     std::cout << "[";
-    auto it = container.begin();
-    auto end = container.end();
+    auto beg = std::begin(container);
+    auto end = std::end(container);
 
-    while (it != end) {
-        std::cout << *it;
-        ++it;
-        if (it != end) {
+    while (beg != end) {
+        std::cout << *beg;
+        ++beg;
+        if (beg != end) {
             std::cout << ", ";
         }
     }
