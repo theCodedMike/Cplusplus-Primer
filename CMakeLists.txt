@@ -56,6 +56,7 @@ add_executable(C___Primer main.cpp
         chapter_3/listing_vector.cpp
         chapter_3/listing_iterator.cpp
         chapter_3/listing_array.cpp
+        chapter_3/listing_2d_array.cpp
         chapter_3/test_3_2.cpp
         chapter_3/test_3_4.cpp
         chapter_3/test_3_5.cpp
@@ -85,5 +86,7 @@ add_executable(C___Primer main.cpp
         chapter_3/test_3_40.cpp
         chapter_3/test_3_41.cpp
         chapter_3/test_3_42.cpp
+        chapter_3/test_3_43.cpp
+        chapter_3/test_3_45.cpp
 
 )

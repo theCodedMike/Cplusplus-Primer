@@ -2,6 +2,7 @@
 // Created by lixia on 2025/8/21.
 //
 
+#include <array>
 #include <cstring>
 #include "../include/Utils.h"
 using std::string;
@@ -15,12 +16,15 @@ void initialize();
 void traverse();
 void pointer_and_array();
 void c_style_character_string();
+void container_array();
 
 int main(int argc, char *argv[]) {
     //initialize();
     //traverse();
     //pointer_and_array();
-    c_style_character_string();
+    //c_style_character_string();
+
+    container_array();
 }
 
 void initialize() {
@@ -113,4 +117,24 @@ void c_style_character_string() {
     cout << ca1 << "(" << strlen(ca1) << ") " << ca2 << "(" << strlen(ca2) << ")" << endl; // helloHello2(11) Hello2(6)
     strcpy(ca1, ca2);
     cout << ca1 << "(" << strlen(ca1) << ") " << ca2 << "(" << strlen(ca2) << ")" << endl; // Hello2(6) Hello2(6)
+}
+
+// std::array 是在 C++11 标准中引入的
+// 推荐使用它而不是C风格数组
+void container_array() {
+    std::array<int, 5> nums = {2, 3 ,5};
+    for (int num: nums) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    for (auto beg = nums.cbegin(); beg < nums.cend(); ++beg)
+        cout << *beg << " ";
+    cout << endl;
+
+    cout << nums.size() << endl; // 5
+    cout << nums[1] << endl;     // 3
+    cout << nums.at(1) << endl;// 3
+    cout << nums.front() << endl;// 2
+    cout << nums.back() << endl; // 0
 }
