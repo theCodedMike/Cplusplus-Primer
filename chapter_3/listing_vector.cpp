@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <vector>
+
+#include "../include/Utils.h"
 using std::vector;
 using std::cout;
 using std::endl;
@@ -16,12 +18,12 @@ void count_grade();
 
 int main(int argc, char *argv[]) {
     // 初始化
-    //initialize();
+    initialize();
     // 添加
     //push_back();
     // 其他操作
     //modify_vector();
-    count_grade();
+    //count_grade();
 }
 
 void initialize() {
@@ -34,6 +36,10 @@ void initialize() {
 
     vector<int> v6{-2, 29, 25, 98};
     vector<int> v7 = {-2, 29, 25, 98}; // v7和v6是等价的
+
+    int arr[] = {0, 1, 2, 3, 4};
+    const vector<int> vec(std::begin(arr), std::end(arr));
+    print_collection(vec);
 }
 
 // 2倍扩容原则

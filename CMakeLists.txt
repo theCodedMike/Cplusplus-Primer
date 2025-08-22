@@ -83,5 +83,7 @@ add_executable(C___Primer main.cpp
         chapter_3/test_3_37.cpp
         chapter_3/test_3_39.cpp
         chapter_3/test_3_40.cpp
+        chapter_3/test_3_41.cpp
+        chapter_3/test_3_42.cpp
 
 )
