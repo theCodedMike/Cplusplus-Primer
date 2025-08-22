@@ -2,6 +2,7 @@
 // Created by lixia on 2025/8/21.
 //
 
+#include <cstring>
 #include "../include/Utils.h"
 using std::string;
 using std::cout;
@@ -13,12 +14,13 @@ using std::end;
 void initialize();
 void traverse();
 void pointer_and_array();
-
+void c_style_character_string();
 
 int main(int argc, char *argv[]) {
     //initialize();
     //traverse();
-    pointer_and_array();
+    //pointer_and_array();
+    c_style_character_string();
 }
 
 void initialize() {
@@ -97,4 +99,18 @@ void pointer_and_array() {
 
     auto pend = end(p5);
     cout << *(pend - 1) << endl; // 3
+}
+
+void c_style_character_string() {
+    char ca[] = {'C', '+', '+'}; // 不以\0结束，不推荐
+    cout << strlen(ca) << " " << size(ca) << endl; // 3 3
+    char ca1[] = "hello";
+    const char ca2[] = "Hello2";
+    cout << strlen(ca1) << " " << strlen(ca2) << " " << size(ca2) << endl; // 5 6 7
+    cout << strcmp(ca1, ca2) << endl; // 1
+
+    strcat(ca1, ca2);
+    cout << ca1 << "(" << strlen(ca1) << ") " << ca2 << "(" << strlen(ca2) << ")" << endl; // helloHello2(11) Hello2(6)
+    strcpy(ca1, ca2);
+    cout << ca1 << "(" << strlen(ca1) << ") " << ca2 << "(" << strlen(ca2) << ")" << endl; // Hello2(6) Hello2(6)
 }
