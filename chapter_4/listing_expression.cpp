@@ -7,6 +7,7 @@
 using std::cout;
 using std::endl;
 using std::vector;
+using std::string;
 
 
 int main(int argc, char *argv[]) {
@@ -24,4 +25,16 @@ int main(int argc, char *argv[]) {
         cout << *beg++ << ' ';
     }
     cout << endl;
+
+    // 成员访问运算符
+    string s1 = "a string", *p = &s1;
+    cout << s1.size() << ' ';
+    cout << p->size() << ' ';
+    cout << (*p).size() << endl; // 8 8 8
+
+    // 条件运算符
+    int grade = 6;
+    grade = 10;
+    string result = grade < 60 ? "fail" : "pass";
+    result = grade > 90 ? "high pass" : grade < 60 ? "fail" : "pass";
 }
