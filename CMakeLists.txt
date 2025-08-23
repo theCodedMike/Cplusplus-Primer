@@ -89,8 +89,11 @@ add_executable(C___Primer main.cpp
         chapter_3/test_3_43.cpp
         chapter_3/test_3_45.cpp
 
+        chapter_4/listing_expression.cpp
         chapter_4/test_4_1.cpp
         chapter_4/test_4_4.cpp
         chapter_4/test_4_10.cpp
+        chapter_4/test_4_13.cpp
+        chapter_4/test_4_18.cpp
 
 )
