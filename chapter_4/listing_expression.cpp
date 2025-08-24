@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <vector>
+
+#include "../include/Utils.h"
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -64,4 +66,46 @@ int main(int argc, char *argv[]) {
 
     string s = "hello";
     cout << sizeof(s) << ' ' << s.size() << ' ' << s.capacity() << endl; // 32 5 15
+    cout << endl;
+
+    // 逗号运算符
+    int x = (i = 10, j = 20, k = 30, i + j + k);
+    cout << x << endl; // 60
+    vector<int> grades(10, 0);
+    int first = 100;
+    for (size_t i = 0; i < grades.size(); ++i, --first)
+        grades[i] = first;
+    print_collection(grades); // [100, 99, 98, 97, 96, 95, 94, 93, 92, 91]
+    cout << endl;
+
+    // 类型转换
+    bool flag; char cVal;
+    short sVal; unsigned short usVal;
+    int iVal; unsigned int uiVal;
+    long lVal; unsigned long ulVal;
+    float fVal; double dVal;
+    3.14159L + 'a'; // ‘a'提升成int，然后该int转换成long double
+    dVal + iVal; // iVal转换成double
+    dVal + fVal; // fVal转换成double
+    iVal = dVal; // dVal转换成int
+    flag = dVal; // 如果dVal是0,则flag是false；否则为true
+    cVal + fVal; // cVal提升成int，然后该int转换成float
+    sVal + cVal; // sVal和cVal提升成int
+    cVal + lVal; // cVal转换成long
+    iVal + ulVal; // iVal提升成unsigned long
+    usVal + iVal; // 根据unsigned short和int所占空间大小进行提升
+    uiVal + lVal; // 根据unsigned int和long所占空间大小进行提升
+
+    // 类型转换
+    int w = 10;
+    double slope = static_cast<double>(w) / i;
+    void *pW = &w;
+    int *dp = static_cast<int *>(pW);
+
+    const char *pc;
+    char *pd = const_cast<char *>(pc);
+
+    int *ip;
+    char *pr = reinterpret_cast<char *>(ip); // pr指向一个int而非char
+
 }
