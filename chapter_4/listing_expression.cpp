@@ -4,11 +4,7 @@
 
 #include <iostream>
 #include <vector>
-using std::cout;
-using std::endl;
-using std::vector;
-using std::string;
-
+using namespace std;
 
 int main(int argc, char *argv[]) {
     // 赋值运算符
@@ -37,4 +33,35 @@ int main(int argc, char *argv[]) {
     grade = 10;
     string result = grade < 60 ? "fail" : "pass";
     result = grade > 90 ? "high pass" : grade < 60 ? "fail" : "pass";
+
+    // sizeof
+    cout << sizeof(byte) << endl;  // 1
+    cout << sizeof(char) << endl;  // 1
+    cout << sizeof(short) << endl; // 2
+    cout << sizeof(int) << endl;   // 4
+    cout << sizeof(long) << endl;  // 4
+    cout << sizeof(long long) << endl;  // 8
+    cout << sizeof(float) << endl;      // 4
+    cout << sizeof(double) << endl;     // 8
+    cout << sizeof(long double) << endl;// 16
+    cout << endl;
+    int a = 55;
+    int *pA = &a;
+    int &rA = a;
+    cout << sizeof(pA) << endl; // 8
+    cout << sizeof(*pA) << endl;// 4
+    cout << sizeof(rA) << endl; // 4
+    cout << endl;
+
+    int arr[5] = {1, 2, 3, 4, 5};
+    cout << sizeof(arr) << endl; // 20
+    cout << (sizeof(arr) / sizeof(*arr)) << endl; // 5
+    cout << endl;
+
+    vector<int> vec = {1, 2, 3, 4, 5};
+    cout << sizeof(vec) << ' ' << vec.size() << ' ' << vec.capacity() << endl; // 24 5 5
+    cout << endl;
+
+    string s = "hello";
+    cout << sizeof(s) << ' ' << s.size() << ' ' << s.capacity() << endl; // 32 5 15
 }

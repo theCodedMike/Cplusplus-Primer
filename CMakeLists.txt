@@ -98,4 +98,6 @@ add_executable(C___Primer main.cpp
         chapter_4/test_4_21.cpp
         chapter_4/test_4_22.cpp
         chapter_4/test_4_23.cpp
+        chapter_4/test_4_27.cpp
+        chapter_4/test_4_29.cpp
 )
