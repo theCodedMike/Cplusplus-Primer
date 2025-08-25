@@ -10,7 +10,7 @@ using namespace std;
 void switch_statement();
 void if_statement();
 void simple_statement();
-
+void do_while();
 
 int main(int argc, char *argv[]) {
     // 简单语句
@@ -23,7 +23,10 @@ int main(int argc, char *argv[]) {
 
     // 条件语句
     //if_statement();
-    switch_statement();
+    //switch_statement();
+
+    // 迭代语句
+    do_while();
 }
 
 void simple_statement() {
@@ -90,4 +93,17 @@ void switch_statement() {
         }
     }
     cout << "Number of vowel: \t" << vowelCnt << endl;
+}
+
+void do_while() {
+    string rsp;
+    do {
+        cout << "please enter two values: ";
+        int val1 = 0, val2 = 0;
+        cin >> val1 >> val2;
+        cout << "The sum of " << val1 << " and " << val2
+        << " = " << val1 + val2 << endl << endl
+        << "More? Enter yes or no: ";
+        cin >> rsp;
+    } while (!rsp.empty() && rsp[0] != 'n');
 }
