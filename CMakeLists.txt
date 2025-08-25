@@ -101,4 +101,14 @@ add_executable(C___Primer main.cpp
         chapter_4/test_4_27.cpp
         chapter_4/test_4_29.cpp
         chapter_4/test_4_36.cpp
+
+        chapter_5/listing_statement.cpp
+        chapter_5/test_5_3.cpp
+        chapter_5/test_5_5.cpp
+        chapter_5/test_5_6.cpp
+        chapter_5/test_5_9.cpp
+        chapter_5/test_5_10.cpp
+        chapter_5/test_5_11.cpp
+        chapter_5/test_5_12.cpp
+        chapter_5/test_5_13.cpp
 )
