@@ -114,4 +114,10 @@ add_executable(C___Primer main.cpp
         chapter_5/test_5_14.cpp
         chapter_5/test_5_17.cpp
         chapter_5/test_5_19.cpp
+        chapter_5/test_5_20.cpp
+        chapter_5/test_5_21.cpp
+        chapter_5/test_5_22.cpp
+        chapter_5/test_5_23.cpp
+        chapter_5/test_5_24.cpp
+        chapter_5/test_5_25.cpp
 )
