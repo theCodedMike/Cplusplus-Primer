@@ -7,6 +7,7 @@ add_executable(C___Primer main.cpp
         include/Sales_item.h
         include/Sales_data.h
         include/Utils.h
+        include/Chapter6.h
 
         chapter_1/listing_io.cpp
         chapter_1/listing_comment.cpp
@@ -120,4 +121,11 @@ add_executable(C___Primer main.cpp
         chapter_5/test_5_23.cpp
         chapter_5/test_5_24.cpp
         chapter_5/test_5_25.cpp
+
+        chapter_6/listing_function.cpp
+        chapter_6/test_6_3.cpp
+        chapter_6/test_6_4.cpp
+        chapter_6/test_6_5.cpp
+        chapter_6/test_6_6.cpp
+        chapter_6/test_6_7.cpp
 )
