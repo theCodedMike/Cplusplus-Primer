@@ -128,4 +128,13 @@ add_executable(C___Primer main.cpp
         chapter_6/test_6_5.cpp
         chapter_6/test_6_6.cpp
         chapter_6/test_6_7.cpp
+        chapter_6/test_6_10.cpp
+        chapter_6/test_6_12.cpp
+        chapter_6/test_6_17.cpp
+        chapter_6/test_6_21.cpp
+        chapter_6/test_6_22.cpp
+        chapter_6/test_6_23.cpp
+        chapter_6/test_6_24.cpp
+        chapter_6/test_6_25.cpp
+        chapter_6/test_6_27.cpp
 )
