@@ -41,6 +41,7 @@ int main(int argc, char *argv[]) {
             ;//*beg = 10; // ❌ initializer_list是只读的
     }
     var_argc(3, "hello", "world", "ok", 3.4);
+    cout << "5! = " << factorial(5) << endl; // 递归函数
 }
 
 int fact(int val) {
@@ -125,4 +126,21 @@ void print_2d_array(int matrix[][4], const int row_size)
 // 省略符形参只能出现在形参列表的最后一个位置
 void var_argc(...) {
 
+}
+
+// 不要这么做
+const string &manip() {
+    string ret;
+
+    if (ret.empty())
+        return "Empty"; // ❌
+
+    return ret; // ❌
+}
+
+int factorial(const int val) {
+    if (val <= 1)
+        return 1;
+
+    return val * factorial(val - 1);
 }

@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -27,6 +28,6 @@ bool have_upper_letter(const string &s);
 void all_to_lower(string &s);
 void print_2d_array(int (*matrix)[4], int row_size);
 int my_max(int i1, const int *i2);
-
+int factorial(int val);
 
 #endif //CHAPTER6_H
