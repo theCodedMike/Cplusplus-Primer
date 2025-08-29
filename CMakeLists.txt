@@ -142,4 +142,5 @@ add_executable(C___Primer main.cpp
         chapter_6/test_6_37.cpp
         chapter_6/test_6_42.cpp
         chapter_6/test_6_44.cpp
+        chapter_6/test_6_56.cpp
 )

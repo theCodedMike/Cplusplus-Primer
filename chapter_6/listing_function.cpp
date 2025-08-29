@@ -5,6 +5,8 @@
 #include "../include/Chapter6.h"
 
 void var_argc(...);
+bool length_compare(const string &, const string &);
+
 
 int main(int argc, char *argv[]) {
     // 函数基础
@@ -42,6 +44,13 @@ int main(int argc, char *argv[]) {
     }
     var_argc(3, "hello", "world", "ok", 3.4);
     cout << "5! = " << factorial(5) << endl; // 递归函数
+
+    // 函数指针
+    bool (*pf) (const string &, const string &);
+    pf = length_compare; // 等价于pf = &length_compare;
+    cout << pf("hello", "haha") << endl;
+    cout << (*pf)("hello", "world") << endl;
+    cout << length_compare("hello", "world") << endl;
 }
 
 int fact(int val) {
@@ -143,4 +152,8 @@ int factorial(const int val) {
         return 1;
 
     return val * factorial(val - 1);
+}
+
+bool length_compare(const string &s1, const string &s2) {
+    return s1.size() < s2.size();
 }
