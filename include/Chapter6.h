@@ -29,5 +29,7 @@ void all_to_lower(string &s);
 void print_2d_array(int (*matrix)[4], int row_size);
 int my_max(int i1, const int *i2);
 int factorial(int val);
+auto is_shorter(const string &s1, const string &s2) -> bool;
+
 
 #endif //CHAPTER6_H
