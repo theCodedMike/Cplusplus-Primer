@@ -9,6 +9,7 @@ add_executable(C___Primer main.cpp
         include/Utils.h
         include/Chapter6.h
         include/Person.h
+        include/Screen.h
 
         chapter_1/listing_io.cpp
         chapter_1/listing_comment.cpp
@@ -146,4 +147,8 @@ add_executable(C___Primer main.cpp
         chapter_6/test_6_56.cpp
 
         chapter_7/test_7_11.cpp
+        chapter_7/listing_class.cpp
+        chapter_7/test_7_27.cpp
+        chapter_7/test_7_31.cpp
+        include/Window_mgr.h
 )
