@@ -8,19 +8,25 @@
 #include <vector>
 #include "Screen.h"
 
-using ScreenIdx = std::vector<Screen>::size_type;
-
 class Window_mgr {
     std::vector<Screen> screens{Screen(24, 80, ' ')};
 
 public:
+    using ScreenIdx = std::vector<Screen>::size_type;
+
     void clear(ScreenIdx);
+    ScreenIdx add_screen(const Screen &);
 };
 
 
 inline void Window_mgr::clear(const ScreenIdx idx) {
     Screen & s = screens[idx];
     s.contents = std::string(s.height * s.width, ' ');
+}
+
+inline Window_mgr::ScreenIdx Window_mgr::add_screen(const Screen &s) {
+    screens.push_back(s);
+    return screens.size() - 1;
 }
 
 
