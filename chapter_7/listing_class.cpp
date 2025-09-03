@@ -4,6 +4,7 @@
 
 #include <iostream>
 
+#include "../include/Account.h"
 #include "../include/Sales_data.h"
 #include "../include/Screen.h"
 using namespace std;
@@ -20,6 +21,7 @@ int main(int argc, char *argv[]) {
 
     myScreen.set('#').display(cout); // 调用非常量版本
     blank.display(cout); // 调用常量版本
+    cout << endl;
 
     // 隐式的类类型转换
     Sales_data item("ISBN-911", 10, 20.3);
@@ -30,4 +32,10 @@ int main(int argc, char *argv[]) {
 
     // 聚合类
     Data val1 = {0, "Hello"};
+
+    // 类的静态成员
+    const double rate = Account::rate();
+    cout << rate << endl;
+    Account::rate(0.34);
+    cout << Account::rate() << endl;
 }

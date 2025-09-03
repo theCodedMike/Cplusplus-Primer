@@ -11,6 +11,7 @@ add_executable(C___Primer main.cpp
         include/Person.h
         include/Screen.h
         include/Window_mgr.h
+        include/Account.h
 
         chapter_1/listing_io.cpp
         chapter_1/listing_comment.cpp
@@ -155,4 +156,5 @@ add_executable(C___Primer main.cpp
         chapter_7/test_7_36.cpp
         chapter_7/test_7_43.cpp
         chapter_7/test_7_52.cpp
+        chapter_7/test_7_58.cpp
 )
