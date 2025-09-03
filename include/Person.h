@@ -15,7 +15,7 @@ public:
     Person(const std::string &name, const std::string &address)
         : name(name), address(address) {}
 
-    Person(std::istream &is);
+    explicit Person(std::istream &is);
 
     std::string get_name() const { return name; }
     std::string get_address() const { return address; }

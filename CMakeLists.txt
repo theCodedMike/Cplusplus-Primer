@@ -152,4 +152,7 @@ add_executable(C___Primer main.cpp
         chapter_7/test_7_27.cpp
         chapter_7/test_7_31.cpp
         chapter_7/test_7_35.cpp
+        chapter_7/test_7_36.cpp
+        chapter_7/test_7_43.cpp
+        chapter_7/test_7_52.cpp
 )

@@ -12,10 +12,11 @@ class Sales_data {
     double revenue = 0.0;
 public:
     Sales_data() = default;
-    Sales_data(const std::string &s) : bookNo(s) {}
+    //Sales_data() : Sales_data("", 0, 0) {} // 委托构造函数
+    Sales_data(const std::string &s) : Sales_data(s, 0, 0) {}
     Sales_data(const std::string &s, unsigned n, double p)
         : bookNo(s), units_sold(n), revenue(p * n) {}
-    Sales_data(std::istream &);
+    explicit Sales_data(std::istream &); // explicit可以避免隐式类类型转换
 
     // 既声明也定义，也是内联函数
     std::string isbn() const {
