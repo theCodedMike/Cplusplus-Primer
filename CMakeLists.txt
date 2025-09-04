@@ -157,4 +157,7 @@ add_executable(C___Primer main.cpp
         chapter_7/test_7_43.cpp
         chapter_7/test_7_52.cpp
         chapter_7/test_7_58.cpp
+
+        chapter_8/listing_io.cpp
+        chapter_8/test_8_1.cpp
 )
