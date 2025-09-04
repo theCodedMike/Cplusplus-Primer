@@ -66,7 +66,6 @@ inline std::ostream & print(std::ostream &os, const Sales_data &item) {
        << item.revenue << " " << item.avg_price();
     return os;
 }
-
 Sales_data::Sales_data(std::istream &is) {
     read(is, *this);
 }

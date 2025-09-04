@@ -160,4 +160,8 @@ add_executable(C___Primer main.cpp
 
         chapter_8/listing_io.cpp
         chapter_8/test_8_1.cpp
+        chapter_8/test_8_4.cpp
+        chapter_8/test_8_5.cpp
+        chapter_8/test_8_6.cpp
+        chapter_8/test_8_7.cpp
 )
