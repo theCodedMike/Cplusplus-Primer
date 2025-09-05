@@ -1,5 +1,6 @@
 # 第8章 类
 ## 8.1 IO类
+类fstream和类stringstream继承自类iostream。
 <table>
     <tr>
         <th colspan="4">表8.1 IO库类型和头文件</th>
@@ -29,6 +30,51 @@
 
 ### 8.1.1 IO对象无拷贝或赋值
 ### 8.1.2 条件状态
+<table>
+    <tr>
+        <th colspan="2">表8.2 IO库条件状态</th>
+    </tr>
+    <tr>
+        <td>strm::iostate</td> <td>iostate是一种机器相关的类型</td>
+    </tr>
+    <tr>
+        <td>strm::badbit</td> <td>表明流已崩溃</td>
+    </tr>
+    <tr>
+        <td>strm::failbit</td> <td>表明一个IO操作失败了</td>
+    </tr>
+    <tr>
+        <td>strm::eofbit</td> <td>表明流到达文件结束</td>
+    </tr>
+    <tr>
+        <td>strm::goodbit</td> <td>表明流正常。此值保证为0</td>
+    </tr>
+    <tr>
+        <td>s.eof()</td> <td>若流s的eofbit置位，则返回true</td>
+    </tr>
+    <tr>
+        <td>s.fail()</td> <td>若流s的failbit或badbit置位，则返回true</td>
+    </tr>
+    <tr>
+        <td>s.bad()</td> <td>若流s的badbit置位，则返回true</td>
+    </tr>
+    <tr>
+        <td>s.good()</td> <td>若流s处于有效状态，则返回true</td>
+    </tr>
+    <tr>
+        <td>s.clear()</td> <td>将流s中所有条件状态复位，将流的状态设置为有效</td>
+    </tr>
+    <tr>
+        <td>s.clear(flags)</td> <td>根据给定的flags标志位，将流s中对应条件状态位复位。flags的类型为strm::iostate</td>
+    </tr>
+    <tr>
+        <td>s.setatate(flags)</td> <td>根据给定的flags标志位，给流s增加对应的条件状态位。flags的类型为strm::iostate</td>
+    </tr>
+    <tr>
+        <td>s.rdstate()</td> <td>返回流s的当前条件状态，返回类型为strm::iostate</td>
+    </tr>
+</table>
+
 ### 8.1.3 管理输出缓冲
 缓冲区刷新的原因可能有：
 - 程序正常结束，作为main函数的return操作的一部分，缓冲刷新被执行
@@ -38,6 +84,30 @@
 - 一个输出流可能被关联到另一个流。在这种情况下，当读写被关联的流时，关联到的流的缓冲区会被刷新。默认情况下，cin和cout被关联到cout
 
 ## 8.2 文件输入输出
+<table>
+    <tr>
+        <th colspan="2">表8.3 fstream特有的操作</th>
+    </tr>
+    <tr>
+        <td>fstream fstrm;</td> <td>创建一个未绑定的文件流</td>
+    </tr>
+    <tr>
+        <td>fstream fstrm(s)</td> <td>创建一个文件流，并打开名为s的文件。s可以是string类型，或是一个C风格字符串的指针。默认的文件模式mode依赖于fstream的类型</td>
+    </tr>
+    <tr>
+        <td>fstream fstrm(s, mode);</td> <td>与前一个构造函数类似，并按指定mode打开文件</td>
+    </tr>
+    <tr>
+        <td>fstrm.open(s)</td> <td>打开名为s的文件，并将文件与fstrm绑定</td>
+    </tr>
+    <tr>
+        <td>fstrm.close()</td> <td>关闭与fstrm绑定的文件</td>
+    </tr>
+    <tr>
+        <td>fstrm.is_open()</td> <td>指出与fstrm关联的文件是否成功打开</td>
+    </tr>
+</table>
+
 ### 8.2.1 使用文件流对象
 ### 8.2.2 文件模式
 <table>
@@ -67,6 +137,24 @@
 
 
 ## 8.3 string流
+<table>
+    <tr>
+        <th colspan="2">表8.5 stringstream特有的操作</th>
+    </tr>
+    <tr>
+        <td>sstream strm;</td> <td>创建一个未绑定的stringstream对象</td>
+    </tr>
+    <tr>
+        <td>sstream strm(s);</td> <td>strm是一个sstream对象，保存s的一个拷贝</td>
+    </tr>
+    <tr>
+        <td>strm.str();</td> <td>返回strm所保存的string的拷贝</td>
+    </tr>
+    <tr>
+        <td>strm.str(s)</td> <td>将string拷贝到strm中</td>
+    </tr>
+</table>
+
 ### 8.3.1 使用istringstream
 ### 8.3.2 使用ostringstream
 
@@ -103,11 +191,18 @@ while(cin >> i) /* ... */
 
 <b>练习8.8</b> 修改上一题的程序，将结果追加到给定的文件末尾。对同一个输出文件，运行程序至少2次，检验数据是否得以保留。
 
+### 8.3.1节练习
+<b>练习8.9</b> 使用你为8.1.2节第1个练习所编写的函数打印一个istringstream对象的内容。
 
+<b>练习8.10</b> 编写程序，将来自一个文件中的行保存在一个vector<string>中，然后使用一个istringstream从vector中读取数据元素，每次读取一个单词。
 
+<b>练习8.11</b> 本节的程序在外层while循环中定义了istringstream对象。如果record对象定义在循环之外，你需要对程序进行怎样的修改？
 
+<b>练习8.12</b> 我们为什么没有在PersonInfo中使用类内初始化？
 
+### 8.3.2节练习
+<b>练习8.13</b> 重写本节的电话号码程序，从一个命名文件而非cin读取数据。
 
-
+<b>练习8.14</b> 我们为什么将entry和nums定义为const auto&?
 
 

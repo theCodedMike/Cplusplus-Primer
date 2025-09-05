@@ -164,4 +164,8 @@ add_executable(C___Primer main.cpp
         chapter_8/test_8_5.cpp
         chapter_8/test_8_6.cpp
         chapter_8/test_8_7.cpp
+        chapter_8/test_8_9.cpp
+        chapter_8/test_8_10.cpp
+        chapter_8/test_8_11.cpp
+        include/PersonInfo.h
 )

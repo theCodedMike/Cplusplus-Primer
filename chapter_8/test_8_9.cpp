@@ -1,8 +1,9 @@
 //
-// Created by lixia on 2025/9/4.
+// Created by lixia on 2025/9/5.
 //
 
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 std::istream & input(std::istream &is) {
@@ -16,5 +17,7 @@ std::istream & input(std::istream &is) {
 
 
 int main(int argc, char *argv[]) {
-    input(std::cin);
+    string s = "hello world";
+    istringstream sin(s);
+    input(sin);
 }
