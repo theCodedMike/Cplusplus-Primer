@@ -169,4 +169,13 @@ add_executable(C___Primer main.cpp
         chapter_8/test_8_10.cpp
         chapter_8/test_8_11.cpp
 
+        chapter_9/listing_vector.cpp
+        chapter_9/test_9_2.cpp
+        chapter_9/test_9_4.cpp
+        chapter_9/test_9_5.cpp
+        chapter_9/test_9_6.cpp
+        chapter_9/test_9_14.cpp
+        chapter_9/test_9_15.cpp
+        chapter_9/test_9_16.cpp
+
 )
