@@ -169,7 +169,7 @@ add_executable(C___Primer main.cpp
         chapter_8/test_8_10.cpp
         chapter_8/test_8_11.cpp
 
-        chapter_9/listing_vector.cpp
+        chapter_9/listing_seq_container.cpp
         chapter_9/test_9_2.cpp
         chapter_9/test_9_4.cpp
         chapter_9/test_9_5.cpp
@@ -177,5 +177,18 @@ add_executable(C___Primer main.cpp
         chapter_9/test_9_14.cpp
         chapter_9/test_9_15.cpp
         chapter_9/test_9_16.cpp
-
+        chapter_9/test_9_18.cpp
+        chapter_9/test_9_19.cpp
+        chapter_9/test_9_20.cpp
+        chapter_9/test_9_21.cpp
+        chapter_9/test_9_22.cpp
+        chapter_9/test_9_23.cpp
+        chapter_9/test_9_24.cpp
+        chapter_9/test_9_25.cpp
+        chapter_9/test_9_26.cpp
+        chapter_9/test_9_27.cpp
+        chapter_9/test_9_28.cpp
+        chapter_9/test_9_31.cpp
+        chapter_9/test_9_33.cpp
+        chapter_9/test_9_34.cpp
 )
