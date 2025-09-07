@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 4.0)
 project(C___Primer)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -192,4 +192,13 @@ add_executable(C___Primer main.cpp
         chapter_9/test_9_33.cpp
         chapter_9/test_9_34.cpp
         chapter_9/test_9_38.cpp
+        chapter_9/test_9_41.cpp
+        chapter_9/test_9_43.cpp
+        chapter_9/test_9_44.cpp
+        chapter_9/test_9_45.cpp
+        chapter_9/test_9_46.cpp
+        chapter_9/test_9_47.cpp
+        chapter_9/test_9_48.cpp
+        chapter_9/test_9_50.cpp
+        chapter_9/test_9_51.cpp
 )

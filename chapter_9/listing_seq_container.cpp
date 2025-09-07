@@ -20,7 +20,7 @@ void operate_forward_list();
 void resize();
 void iterator_invalid();
 void manage_capacity();
-
+void more_string_operation();
 
 int main(int argc, char *argv[]) {
     //container_type_member();
@@ -34,7 +34,8 @@ int main(int argc, char *argv[]) {
     //operate_forward_list();
     //resize();
     //iterator_invalid();
-    manage_capacity();
+    //manage_capacity();
+    more_string_operation();
 }
 
 // 容器类型成员
@@ -270,4 +271,94 @@ void manage_capacity() {
     print_collection(nums); // [0, 1, 2, 3, 4, 5]
     cout << "size: " << nums.size() << endl;    // 6
     cout << " cap: " << nums.capacity() << endl;// 20
+}
+
+void more_string_operation() {
+    const char *cp = "hello world!";
+    char noNull[] = {'H', 'i'};
+    string s1(cp); cout << s1 << endl; // hello world!
+    string s2(noNull, 2); cout << s2 << endl; // Hi
+    string s3(noNull); cout << s3 << endl; // 未定义，noNull不是以空字符结束
+    string s4(cp + 6, 5); cout << s4 << endl; // world
+    string s5(s1, 6, 5); cout << s5 << endl; // world
+    string s6(s1, 6); cout << s6 << endl; // world!
+    string s7(s1, 6, 20); cout << s7 << endl; // world!
+    //string s8(s1, 16); cout << s8 << endl; // std::out_of_range
+    cout << endl;
+
+    string s("hello world");
+    s2 = s.substr(0, 5); cout << s2 << endl; // hello
+    s3 = s.substr(6); cout << s3 << endl; // world
+    s4 = s.substr(6, 11); cout << s4 << endl; // world
+    //s5 = s.substr(12); cout << s5 << endl; // std::out_of_range
+    cout << endl;
+
+    string non_ascii = "我爱你";
+    s2 = non_ascii.substr(0, 2); cout << s2 << endl; // 乱码
+    cout << endl;
+
+    // s.insert(pos, args)
+    // s.erase(pos, len)
+    // s.assign(args)
+    // s.append(args)
+    // s.replace(range, args)
+    //
+    // args可以是下列形式之一
+    // str               字符串str
+    // str, pos, len     str中从pos开始最多len个子
+    // cp, len           cp指向的字符数组前(最多)len个字符
+    // cp                cp指向的以'\0'结束的字符数组
+    // n, c              n个字符c
+    // beg, end          迭代器[beg, end)范围内的字符
+    // 初始化列表          花括号包围的，以逗号分割的字符列表
+    s = "111111";
+    s.insert(2, "222"); cout << s << endl; // 112221111
+    s.erase(2, 3); cout << s << endl; // 111111
+    s.assign("222222"); cout << s << endl; // 222222
+    s.append("333"); cout << s << endl; // 222222333
+    s.replace(6,3, "4444"); cout << s << endl; // 2222224444
+    cout << endl;
+
+    // s.find(args)
+    // s.rfind(args)
+    // s.find_first_of(args)
+    // s.find_last_of(args)
+    // s.find_first_not_of(args)
+    // s.find_last_not_of(args)
+    //
+    // args必须是以下形式之一
+    // c, pos
+    // s2, pos
+    // cp, pos
+    // cp, pos, n
+    s = "AnnaAnllemoe";
+    const size_t pos1 = s.find("An"); // 0
+    const size_t pos2 = s.rfind("An");// 4
+    const size_t pos3 = s.find("BB"); // 18446744073709551615
+    cout << (pos3 == string::npos) << endl; // 1
+    string::size_type pos = 0;
+    while ((pos = s.find_first_of("A", pos)) != string::npos) {
+        cout << "find A at index: " << pos << endl;
+        ++pos;
+    }
+    cout << endl;
+
+    s = "Abc";
+    s2 = "abc";
+    cout << s.compare(s2) << endl; // -1
+    cout << s2.compare(1, 1, s) << endl; // 1
+    cout << endl;
+
+    // to_string(val)
+    // stoi(s, pos, bass)
+    // stol(s, pos, base)
+    // stoul(s, pos, base)
+    // stoll(s, pos, base)
+    // stoull(s, pos, base)
+    // stof(s, pos)
+    // stod(s, pos)
+    // stold(s, pos)
+    int i = 42;
+    s = to_string(i);
+    cout << s << " " << stoi(s) << endl; // 42 42
 }
