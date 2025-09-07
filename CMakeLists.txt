@@ -191,4 +191,5 @@ add_executable(C___Primer main.cpp
         chapter_9/test_9_31.cpp
         chapter_9/test_9_33.cpp
         chapter_9/test_9_34.cpp
+        chapter_9/test_9_38.cpp
 )

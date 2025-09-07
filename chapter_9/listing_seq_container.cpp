@@ -19,6 +19,8 @@ void remove_elem();
 void operate_forward_list();
 void resize();
 void iterator_invalid();
+void manage_capacity();
+
 
 int main(int argc, char *argv[]) {
     //container_type_member();
@@ -31,7 +33,8 @@ int main(int argc, char *argv[]) {
     //remove_elem();
     //operate_forward_list();
     //resize();
-    iterator_invalid();
+    //iterator_invalid();
+    manage_capacity();
 }
 
 // 容器类型成员
@@ -227,7 +230,7 @@ void resize() {
 }
 
 void iterator_invalid() {
-    // 删除偶数元素，赋值每个奇数元素
+    // 删除偶数元素，复制每个奇数元素
     vector<int> vi = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     auto iter = vi.begin();
     while (iter != vi.end()) {
@@ -238,4 +241,33 @@ void iterator_invalid() {
             iter = vi.erase(iter);
     }
     print_collection(vi); // [1, 1, 3, 3, 5, 5, 7, 7, 9, 9]
+}
+
+void manage_capacity() {
+    vector<int> nums = {0, 1, 2, 3, 4};
+    cout << "size: " << nums.size() << endl;     // 5
+    cout << " cap: " << nums.capacity() << endl; // 5
+
+    nums.push_back(5);
+    cout << "size: " << nums.size() << endl;    // 6
+    cout << " cap: " << nums.capacity() << endl;// 10
+
+    nums.shrink_to_fit(); // make size and cap same
+    cout << "size: " << nums.size() << endl;    // 6
+    cout << " cap: " << nums.capacity() << endl;// 6
+
+    nums.reserve(10);
+    print_collection(nums); // [0, 1, 2, 3, 4, 5]
+    cout << "size: " << nums.size() << endl;    // 6
+    cout << " cap: " << nums.capacity() << endl;// 10
+
+    nums.reserve(3); // 如果需求大小小于或等于当前容量，则什么也不做
+    print_collection(nums); // [0, 1, 2, 3, 4, 5]
+    cout << "size: " << nums.size() << endl;    // 6
+    cout << " cap: " << nums.capacity() << endl;// 10
+
+    nums.reserve(20);
+    print_collection(nums); // [0, 1, 2, 3, 4, 5]
+    cout << "size: " << nums.size() << endl;    // 6
+    cout << " cap: " << nums.capacity() << endl;// 20
 }
