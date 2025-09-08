@@ -5,6 +5,9 @@
 #include <vector>
 #include <list>
 #include <forward_list>
+#include <queue>
+#include <stack>
+
 #include "../include/Utils.h"
 using namespace std;
 
@@ -21,6 +24,7 @@ void resize();
 void iterator_invalid();
 void manage_capacity();
 void more_string_operation();
+void container_adapter();
 
 int main(int argc, char *argv[]) {
     //container_type_member();
@@ -35,7 +39,8 @@ int main(int argc, char *argv[]) {
     //resize();
     //iterator_invalid();
     //manage_capacity();
-    more_string_operation();
+    //more_string_operation();
+    container_adapter();
 }
 
 // 容器类型成员
@@ -361,4 +366,41 @@ void more_string_operation() {
     int i = 42;
     s = to_string(i);
     cout << s << " " << stoi(s) << endl; // 42 42
+}
+
+void container_adapter() {
+    stack<int> stk;
+    stk.push(1);
+    stk.push(2);
+    cout << stk.top() << endl; // 2
+    stk.pop();
+    cout << stk.size() << endl; // 1
+    cout << endl;
+
+    queue<int> que;
+    que.push(1);
+    que.push(2);
+    cout << que.front() << endl; // 1
+    cout << que.back() << endl;  // 2
+    que.pop();
+    cout << que.size() << endl; // 1
+    cout << endl;
+
+    priority_queue<int> max_heap;
+    max_heap.push(5); max_heap.push(1);
+    max_heap.push(33);max_heap.push(-5);
+    max_heap.push(55);max_heap.push(16);
+    while (!max_heap.empty()) {
+        cout << max_heap.top() << " "; // 55 33 16 5 1 -5
+        max_heap.pop();
+    }
+    cout << endl;
+    priority_queue<int, vector<int>, greater<>> min_heap;
+    min_heap.push(5); min_heap.push(1);
+    min_heap.push(33);min_heap.push(-5);
+    min_heap.push(55);min_heap.push(16);
+    while (!min_heap.empty()) {
+        cout << min_heap.top() << " "; // -5 1 5 16 33 55
+        min_heap.pop();
+    }
 }
