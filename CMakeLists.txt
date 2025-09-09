@@ -202,4 +202,7 @@ add_executable(C___Primer main.cpp
         chapter_9/test_9_50.cpp
         chapter_9/test_9_51.cpp
         chapter_9/test_9_52.cpp
+
+        chapter_10/test_10_1.cpp
+        chapter_10/test_10_2.cpp
 )
