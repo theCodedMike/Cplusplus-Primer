@@ -1,0 +1,73 @@
+//
+// Created by lixia on 2025/9/9.
+//
+#include <algorithm>
+#include <iostream>
+#include <numeric>
+#include <vector>
+#include "../include/Utils.h"
+
+using namespace std;
+
+void elim_dups(vector<string> &);
+
+
+
+int main(int argc, char *argv[]) {
+    // 只读算法
+    vector<int> nums = {11, -9, 345, -90, 71, 33, 2, -9, 0, 0, 121, 0};
+    const auto find = std::ranges::find(nums, 0);
+    cout << (find != nums.cend() ? "find" : "dont find") << endl; // find
+
+    const auto count = std::ranges::count(nums, 0);
+    cout << count << endl; // 3
+
+    const int sum = std::accumulate(nums.cbegin(), nums.cend(), 0);
+    cout << sum << endl; // 475
+
+    const vector<string> names = {"Mike", "John", "Bill"};
+    const auto acc_names = std::accumulate(names.cbegin(), names.cend(), string(""));
+    cout << acc_names << endl; // MikeJohnBill
+
+    const vector<int> v1 = {1, 3, 5}; const vector<int> v2 = {1, 3, 5, 1};
+    const bool equal = std::equal(v1.cbegin(), v1.cend(), v2.cbegin());
+    cout << (equal ? "equal" : "not equal") << endl; // equal
+    cout << endl;
+
+
+    // 写算法
+    vector<int> v3(10, 0);
+    std::fill(v3.begin(), v3.end(), 3);
+    print_collection(v3); // [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+    std::fill(v3.begin(), v3.begin() + 5, 5);
+    print_collection(v3); // [5, 5, 5, 5, 5, 3, 3, 3, 3, 3]
+    std::fill_n(v3.begin(), 3, 7);
+    print_collection(v3); // [7, 7, 7, 5, 5, 3, 3, 3, 3, 3]
+    vector<int> v4;
+    //std::fill_n(v4.begin(), 10, 1); // 异常终止
+    std::fill_n(back_inserter(v4), 10, 1);
+    print_collection(v4); // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+    int a1[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int a2[std::size(a1)];
+    std::copy(std::begin(a1), std::end(a1), a2);
+    print_collection(a2); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    std::replace(std::begin(a1), std::end(a1), 0, -1);
+    print_collection(a1); // [-1, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    vector<int> v5;
+    std::replace_copy(std::cbegin(a1), std::cend(a1), back_inserter(v5), -1, 0);
+    print_collection(v5); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+
+    // 排序
+    vector<string> v6 = {"the", "quick", "red", "fox", "jumps", "over", "the", "slow", "red", "turtle"};
+    elim_dups(v6);
+    print_collection(v6); // [fox, jumps, over, quick, red, slow, the, turtle]
+}
+
+void elim_dups(vector<string> &words) {
+    ranges::sort(words);
+    auto end_unique = std::unique(words.begin(), words.end());
+    words.erase(end_unique, words.end());
+}

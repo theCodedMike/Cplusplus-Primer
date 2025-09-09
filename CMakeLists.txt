@@ -203,6 +203,11 @@ add_executable(C___Primer main.cpp
         chapter_9/test_9_51.cpp
         chapter_9/test_9_52.cpp
 
+        chapter_10/listing_generic_algorithm.cpp
         chapter_10/test_10_1.cpp
         chapter_10/test_10_2.cpp
+        chapter_10/test_10_4.cpp
+        chapter_10/test_10_5.cpp
+        chapter_10/test_10_6.cpp
+        chapter_10/test_10_9.cpp
 )
