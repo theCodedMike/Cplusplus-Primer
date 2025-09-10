@@ -210,4 +210,13 @@ add_executable(C___Primer main.cpp
         chapter_10/test_10_5.cpp
         chapter_10/test_10_6.cpp
         chapter_10/test_10_9.cpp
+        chapter_10/test_10_11.cpp
+        chapter_10/test_10_12.cpp
+        chapter_10/test_10_13.cpp
+        chapter_10/test_10_14.cpp
+        chapter_10/test_10_15.cpp
+        chapter_10/test_10_18.cpp
+        chapter_10/test_10_20.cpp
+        chapter_10/test_10_21.cpp
+        chapter_10/test_10_24.cpp
 )
