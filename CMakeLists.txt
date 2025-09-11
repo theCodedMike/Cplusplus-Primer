@@ -219,4 +219,14 @@ add_executable(C___Primer main.cpp
         chapter_10/test_10_20.cpp
         chapter_10/test_10_21.cpp
         chapter_10/test_10_24.cpp
+        chapter_10/test_10_27.cpp
+        chapter_10/test_10_28.cpp
+        chapter_10/test_10_29.cpp
+        chapter_10/test_10_30.cpp
+        chapter_10/test_10_31.cpp
+        chapter_10/test_10_33.cpp
+        chapter_10/test_10_34.cpp
+        chapter_10/test_10_35.cpp
+        chapter_10/test_10_36.cpp
+        chapter_10/test_10_37.cpp
 )

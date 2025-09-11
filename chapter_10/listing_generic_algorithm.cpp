@@ -4,7 +4,10 @@
 #include <algorithm>
 #include <functional>
 #include <iostream>
+#include <iterator>
+#include <list>
 #include <numeric>
+#include <ranges>
 #include <vector>
 #include "../include/Utils.h"
 
@@ -16,7 +19,9 @@ void fcn2();
 void fcn3();
 void fcn4();
 bool check_size(const string &, string::size_type);
-
+void read_istream_iterator();
+void sum_from_istream_iterator();
+void write_ostream_iterator();
 
 int main(int argc, char *argv[]) {
     // 只读算法
@@ -90,11 +95,41 @@ int main(int argc, char *argv[]) {
             return -i;
         return i;
     });
-    print_collection(v7);
+    print_collection(v7); // [5, 3, 9, 6, 0, 1]
     //参数绑定
     auto check6 = std::bind(check_size, placeholders::_1, 6);
     cout << check6("fuckyou") << endl; //1
     cout << check6("fuck") << endl; // 0
+    cout << endl;
+
+    // 插入迭代器
+    list<int> lst1, lst2, lst3;
+    ranges::copy(v7, back_inserter(lst1));
+    print_collection(lst1); // [5, 3, 9, 6, 0, 1]
+    ranges::copy(v7, front_inserter(lst2));
+    print_collection(lst2); // [1, 0, 6, 9, 3, 5]
+    ranges::copy(v7, inserter(lst3, lst3.begin()));
+    print_collection(lst3); // [5, 3, 9, 6, 0, 1]
+    // iostream迭代器
+    //read_istream_iterator();
+    //sum_from_istream_iterator();
+    //write_ostream_iterator();
+    ostream_iterator<int> os_iter(cout, " ");
+    std::ranges::copy(v7.cbegin(), v7.cend(), os_iter); // 5 3 9 6 0 1
+    cout << endl;
+    // 反向迭代器
+    for (auto iter = lst3.crbegin(); iter != lst3.crend(); ++iter)
+        cout << *iter << " "; // 1 0 6 9 3 5
+    cout << endl;
+    for (const int &iter : ranges::reverse_view(lst3))
+        cout << iter << " "; // 1 0 6 9 3 5
+    cout << endl;
+    string line = "FIRST,MIDDLE,LAST"; // 找出最后一个单词
+    auto comma = ranges::find(line.crbegin(), line.crend(), ',');
+    cout << string(line.crbegin(), comma) << endl; // TSAL
+    cout << string(comma.base(), line.cend()) << endl; // LAST
+
+
 }
 
 void elim_dups(vector<string> &words) {
@@ -156,3 +191,28 @@ bool check_size(const string &s, const string::size_type sz) {
     return s.size() >= sz;
 }
 
+void read_istream_iterator() {
+    istream_iterator<int> in_iter(cin), eof; // 从cin读取int
+    //const istream_iterator<int> eof; // 空的istream_iterator，一旦其关联的流遇到文件尾或遇到IO错误，就会返回该对象
+    //vector<int> vec(in_iter, eof);
+    vector<int> vec;
+
+    while (in_iter != eof) {
+        vec.push_back(*in_iter++);
+    }
+    print_collection(vec);
+}
+
+void sum_from_istream_iterator() {
+    istream_iterator<int> in(cin), eof;
+    cout << accumulate(in, eof, 0);
+}
+
+void write_ostream_iterator() {
+    const vector<int> vec = {10, 9, 8, 7};
+    ostream_iterator<int> out_iter(cout, " ");
+    for (const auto elem : vec) {
+        *out_iter++ = elem;
+    }
+    cout << endl;
+}
