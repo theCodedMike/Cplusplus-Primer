@@ -229,4 +229,5 @@ add_executable(C___Primer main.cpp
         chapter_10/test_10_35.cpp
         chapter_10/test_10_36.cpp
         chapter_10/test_10_37.cpp
+        chapter_10/test_10_42.cpp
 )

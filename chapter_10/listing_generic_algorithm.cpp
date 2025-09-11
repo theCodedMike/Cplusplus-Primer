@@ -129,7 +129,6 @@ int main(int argc, char *argv[]) {
     cout << string(line.crbegin(), comma) << endl; // TSAL
     cout << string(comma.base(), line.cend()) << endl; // LAST
 
-
 }
 
 void elim_dups(vector<string> &words) {
