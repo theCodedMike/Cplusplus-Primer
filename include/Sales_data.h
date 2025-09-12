@@ -69,4 +69,8 @@ inline std::ostream & print(std::ostream &os, const Sales_data &item) {
 Sales_data::Sales_data(std::istream &is) {
     read(is, *this);
 }
+
+inline bool compare_isbn(const Sales_data &lhs, const Sales_data &rhs) {
+    return lhs.isbn() < rhs.isbn();
+}
 #endif //SALES_DATA_H

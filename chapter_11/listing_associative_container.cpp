@@ -6,14 +6,19 @@
 #include <map>
 #include <set>
 #include <string>
+#include <vector>
+#include "../include/Sales_data.h"
 using namespace std;
 
 void use_map();
 void use_set();
+void initialize();
+
 
 int main(int argc, char *argv[]) {
     //use_map();
-    use_set();
+    //use_set();
+    initialize();
 }
 
 void use_map() {
@@ -45,4 +50,34 @@ void use_set() {
     for (const auto &[fst, snd]: word_count) {
         cout << fst << " occurs " << snd << ((snd > 1) ? " times" : " time") << endl;
     }
+}
+
+void initialize() {
+    const map<string, string> authors = {
+        {"Joyce", "James"},
+        {"Austen", "Jane"},
+        {"Dickens", "Charles"}
+    };
+
+    vector<int> ivec;
+    for (vector<int>::size_type i = 0; i != 10; ++i) {
+        ivec.push_back(i);
+        ivec.push_back(i);
+    }
+    set<int> iset(ivec.cbegin(), ivec.cend());
+    multiset<int> miset(ivec.cbegin(), ivec.cend());
+    cout << ivec.size() << endl; // 20
+    cout << iset.size() << endl; // 10
+    cout << miset.size() << endl;// 20
+
+    // 严格弱序
+    multiset<Sales_data, decltype(compare_isbn) *> bookstore(compare_isbn);
+}
+
+void use_pair() {
+    pair<string, string> anon;
+    pair<string, string> author("Hello", "Json");
+    pair<string, string> author2{"Tom", "Jack"};
+    pair<string, string> author3 = {"Lee", "Zhang"};
+
 }

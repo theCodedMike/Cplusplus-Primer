@@ -232,4 +232,10 @@ add_executable(C___Primer main.cpp
         chapter_10/test_10_42.cpp
         chapter_11/listing_associative_container.cpp
         chapter_11/test_11_4.cpp
+        chapter_11/test_11_7.cpp
+        chapter_11/test_11_8.cpp
+        chapter_11/test_11_9.cpp
+        chapter_11/test_11_10.cpp
+        chapter_11/test_11_12.cpp
+        chapter_11/test_11_14.cpp
 )
