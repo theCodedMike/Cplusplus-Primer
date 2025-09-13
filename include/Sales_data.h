@@ -73,4 +73,14 @@ Sales_data::Sales_data(std::istream &is) {
 inline bool compare_isbn(const Sales_data &lhs, const Sales_data &rhs) {
     return lhs.isbn() < rhs.isbn();
 }
+
+inline size_t hasher(const Sales_data &sd) {
+    return std::hash<std::string>()(sd.isbn());
+}
+
+inline bool eq_op(const Sales_data &lhs, const Sales_data &rhs) {
+    return lhs.isbn() == rhs.isbn();
+}
+
+
 #endif //SALES_DATA_H

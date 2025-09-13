@@ -9,6 +9,8 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <unordered_set>
+
 #include "../include/Sales_data.h"
 #include "../include/Utils.h"
 using namespace std;
@@ -35,7 +37,7 @@ int main(int argc, char *argv[]) {
     //traverse_ass_container();
     //insert_elem();
     //erase_elem();
-    word_transform_program();
+    //word_transform_program();
 }
 
 void use_map() {
@@ -219,4 +221,11 @@ const string & transform(const string &s, const map<string, string> &m) {
         return map_iter->second;
 
     return s;
+}
+
+void use_unordered_container() {
+    using SD_multiset = unordered_multiset<Sales_data, decltype(hasher) *, decltype(eq_op) *>;
+    //SD_multiset bookstore(42, hasher, eq_op);
+    SD_multiset bookstore(42);
+
 }
