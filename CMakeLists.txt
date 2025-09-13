@@ -230,6 +230,7 @@ add_executable(C___Primer main.cpp
         chapter_10/test_10_36.cpp
         chapter_10/test_10_37.cpp
         chapter_10/test_10_42.cpp
+
         chapter_11/listing_associative_container.cpp
         chapter_11/test_11_4.cpp
         chapter_11/test_11_7.cpp
@@ -238,4 +239,10 @@ add_executable(C___Primer main.cpp
         chapter_11/test_11_10.cpp
         chapter_11/test_11_12.cpp
         chapter_11/test_11_14.cpp
+        chapter_11/test_11_16.cpp
+        chapter_11/test_11_17.cpp
+        chapter_11/test_11_20.cpp
+        chapter_11/test_11_23.cpp
+        chapter_11/test_11_26.cpp
+        chapter_11/test_11_31.cpp
 )

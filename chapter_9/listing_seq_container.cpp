@@ -16,7 +16,7 @@ void init();
 void assign_and_swap();
 void size_operation();
 void relation_operation();
-void add_elem();
+void insert_elem();
 void access_elem();
 void remove_elem();
 void operate_forward_list();
@@ -133,7 +133,7 @@ void relation_operation() {
     cout << "v1 == v2: " << (v1 == v2) << endl; // false
 }
 
-void add_elem() {
+void insert_elem() {
     vector<int> v;
 
     v.push_back(1);
