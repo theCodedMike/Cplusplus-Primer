@@ -13,6 +13,7 @@ add_executable(C___Primer main.cpp
         include/Window_mgr.h
         include/Account.h
         include/PersonInfo.h
+        include/StrBlob.h
 
         chapter_1/listing_io.cpp
         chapter_1/listing_comment.cpp
@@ -246,4 +247,12 @@ add_executable(C___Primer main.cpp
         chapter_11/test_11_26.cpp
         chapter_11/test_11_31.cpp
         chapter_11/test_11_38.cpp
+
+        chapter_12/listing_dynamic_memory.cpp
+        chapter_12/test_12_6.cpp
+        chapter_12/test_12_7.cpp
+        chapter_12/test_12_10.cpp
+        chapter_12/test_12_14.cpp
+        chapter_12/test_12_17.cpp
+        chapter_12/test_12_20.cpp
 )
