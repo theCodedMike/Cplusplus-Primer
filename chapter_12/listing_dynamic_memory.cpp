@@ -6,6 +6,7 @@
 #include <memory>
 #include <list>
 #include "../include/StrBlob.h"
+#include "../include/TextQuery.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ void use_unique_ptr();
 void use_weak_ptr();
 void use_dynamic_arrays();
 void use_allocator();
-
+void text_query_program();
 
 int main(int argc, char *argv[]) {
     //use_shared_ptr();
@@ -23,7 +24,8 @@ int main(int argc, char *argv[]) {
     //use_unique_ptr();
     //use_weak_ptr();
     //use_dynamic_arrays();
-    use_allocator();
+    //use_allocator();
+    text_query_program();
 }
 
 void use_shared_ptr() {
@@ -187,4 +189,26 @@ void use_allocator() {
     }
     cout << endl;
     alloc2.deallocate(pi, nums.size() * 2);
+}
+
+void run_queries(ifstream & infile) {
+    const TextQuery tq(infile);
+
+    while (true) {
+        cout << "enter word to look for, or q to quit: ";
+        string s;
+        if (!(cin >> s) || s == "q")
+            break;
+        print(cout, tq.query(s)) << endl;
+    }
+}
+void text_query_program() {
+    const string file_path = "./Youth.txt";
+    ifstream infile(file_path);
+    if (!infile.is_open()) {
+        cerr << "cannot open file" + file_path << endl;
+        return;
+    }
+
+    run_queries(infile);
 }

@@ -14,6 +14,7 @@ add_executable(C___Primer main.cpp
         include/Account.h
         include/PersonInfo.h
         include/StrBlob.h
+        include/TextQuery.h
 
         chapter_1/listing_io.cpp
         chapter_1/listing_comment.cpp
@@ -258,4 +259,5 @@ add_executable(C___Primer main.cpp
         chapter_12/test_12_23.cpp
         chapter_12/test_12_24.cpp
         chapter_12/test_12_26.cpp
+        chapter_12/test_12_28.cpp
 )
