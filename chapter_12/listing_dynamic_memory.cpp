@@ -13,13 +13,17 @@ void use_shared_ptr();
 void managing_memory_directly();
 void use_unique_ptr();
 void use_weak_ptr();
+void use_dynamic_arrays();
+void use_allocator();
 
 
 int main(int argc, char *argv[]) {
     //use_shared_ptr();
     //managing_memory_directly();
     //use_unique_ptr();
-    use_weak_ptr();
+    //use_weak_ptr();
+    //use_dynamic_arrays();
+    use_allocator();
 }
 
 void use_shared_ptr() {
@@ -107,4 +111,80 @@ void use_weak_ptr() {
     cout << wp.use_count() << endl; // 1
     if (!wp.expired())
         cout << *wp.lock() << endl; // 100
+}
+
+size_t get_size() {
+    return 0;
+}
+
+void use_dynamic_arrays() {
+    size_t sz = 10; // 必须是整型，不必是常量
+    int *pia = new int[sz]; // 10个未初始化的int
+    delete []pia;
+
+    typedef int arrT[40];
+    int *pia2 = new arrT;
+    delete []pia2;
+
+    int *pia3 = new int[sz](); // 10个值初始化为0的int数组
+    int *pia4 = new int[sz] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    delete []pia3;
+    delete []pia4;
+
+    char arr[get_size()]; // ❌ 不能定义长度为0的数组
+    char *cp = new char[get_size()]; // ✔ cp不能解引用
+    delete []cp;
+
+    unique_ptr<int[]> up(new int[10]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+    for (auto i = 0; i < 10; ++i)
+        cout << up[i] << " ";
+    up.release(); // 自动用delete[]销毁其指针
+    cout << endl;
+
+    shared_ptr<int> sp(new int[10](), [](const int *p) { delete[] p; });
+    for (auto i = 0, *p = sp.get(); i < 10; ++i)
+        cout << p[i] << " ";
+    sp.reset(); cout << endl;
+
+    string *const p = new string[sz];
+    string s;
+    string *q = p;
+    while (cin >> s && q != p + sz) {
+        if (s == "quit")
+            break;
+        *q++ = s;
+    }
+    delete []p;
+}
+
+void use_allocator() {
+    const size_t n = 10;
+    allocator<string> alloc; // 可以分配string的allocator对象
+    const auto p = alloc.allocate(n); // 分配n个未初始化的string
+
+    auto q = p;
+    //alloc.construct(q++); // C++20已移除该api
+    allocator_traits<allocator<string>>::construct(alloc, q++); // *q为空字符串
+    allocator_traits<allocator<string>>::construct(alloc, q++, 10, 'c'); // *q为cccccccccc
+    allocator_traits<allocator<string>>::construct(alloc, q++, "hi"); // *q为hi
+    while (q != p) {
+        //alloc.destroy(--q); // C++20已移除该api
+        auto tmp = --q;
+        cout << *tmp << " ";
+        allocator_traits<allocator<string>>::destroy(alloc, q); // 释放真正构造的string
+    }
+    cout << endl;
+    alloc.deallocate(p, n); // 释放内存
+
+    vector<int> nums = {1, 2, 3, 4, 5};
+    allocator<int> alloc2;
+    auto pi = alloc2.allocate(nums.size() * 2);
+    auto qi = uninitialized_copy(nums.cbegin(), nums.cend(), pi);
+    auto end = uninitialized_fill_n(qi, nums.size(), 10);
+    while (end-- != pi) {
+        cout << *end << " "; // 10 10 10 10 10 5 4 3 2 1
+        allocator_traits<allocator<int>>::destroy(alloc2, end);
+    }
+    cout << endl;
+    alloc2.deallocate(pi, nums.size() * 2);
 }
