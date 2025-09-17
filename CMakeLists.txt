@@ -260,4 +260,8 @@ add_executable(C___Primer main.cpp
         chapter_12/test_12_24.cpp
         chapter_12/test_12_26.cpp
         chapter_12/test_12_28.cpp
+
+        chapter_13/listing_copy_control.cpp
+        chapter_13/test_13_5.cpp
+        include/Employee.h
 )

@@ -18,7 +18,7 @@ public:
     Sales_item() = default;
     Sales_item(const std::string &book): bookNo(book) {}
     Sales_item(std::istream &is) { is >> *this; }
-public:
+
     Sales_item& operator+=(const Sales_item&);
     std::string isbn() const { return bookNo; }
     double avg_price() const;

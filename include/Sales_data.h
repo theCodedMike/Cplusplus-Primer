@@ -17,6 +17,9 @@ public:
     Sales_data(const std::string &s, unsigned n, double p)
         : bookNo(s), units_sold(n), revenue(p * n) {}
     explicit Sales_data(std::istream &); // explicit可以避免隐式类类型转换
+    Sales_data(const Sales_data &); // 拷贝构造函数
+    Sales_data& operator=(const Sales_data&);// 拷贝赋值函数
+    ~Sales_data() = default; // 析构函数
 
     // 既声明也定义，也是内联函数
     std::string isbn() const {
@@ -33,8 +36,17 @@ public:
 
 };
 
-inline double Sales_data::avg_price() const {
-    return units_sold ? revenue / units_sold : 0;
+inline Sales_data::Sales_data(const Sales_data &orig) :
+    bookNo(orig.bookNo),
+    units_sold(orig.units_sold),
+    revenue(orig.revenue)
+{}
+
+inline Sales_data& Sales_data::operator=(const Sales_data &rhs) {
+    bookNo = rhs.bookNo;
+    units_sold = rhs.units_sold;
+    revenue = rhs.revenue;
+    return *this;
 }
 
 inline Sales_data& Sales_data::combine(const Sales_data &rhs) {
@@ -42,6 +54,11 @@ inline Sales_data& Sales_data::combine(const Sales_data &rhs) {
     revenue += rhs.revenue;
     return *this;
 }
+
+inline double Sales_data::avg_price() const {
+    return units_sold ? revenue / units_sold : 0;
+}
+
 
 
 Sales_data add(const Sales_data &, const Sales_data &);
