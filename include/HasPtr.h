@@ -6,6 +6,8 @@
 #define HASPTR_H
 
 #include <string>
+#include <iostream>
+
 
 // 行为像值的类
 class HasPtrVal {
@@ -13,11 +15,25 @@ class HasPtrVal {
     int i;
 
 public:
-    explicit HasPtrVal(const std::string &s = std::string())
-        : ps(new std::string(s)), i(0) {}
+    explicit HasPtrVal(const std::string &s = std::string(), const int i = 0)
+        : ps(new std::string(s)), i(i) {}
     HasPtrVal(const HasPtrVal &hp);
     HasPtrVal& operator=(const HasPtrVal &hp);
+    //HasPtrVal &operator=(HasPtrVal rhs);
     ~HasPtrVal() {delete ps;}
+
+    bool operator<(const HasPtrVal &rhs) const {
+        if (*ps == *rhs.ps)
+            return i < rhs.i;
+        return *ps < *rhs.ps;
+    }
+    bool operator==(const HasPtrVal &rhs) const {
+        return *ps == *rhs.ps && i == rhs.i;
+    }
+    void swap(HasPtrVal &rhs) noexcept;
+//friend
+    friend void swap(HasPtrVal &lhs, HasPtrVal &rhs) noexcept;
+    friend std::ostream & operator<<(std::ostream &os, const HasPtrVal &hp);
 };
 
 inline HasPtrVal::HasPtrVal(const HasPtrVal &hp) :
@@ -32,6 +48,38 @@ inline HasPtrVal& HasPtrVal::operator=(const HasPtrVal &hp) {
     i = hp.i;
     return *this;
 }
+/*
+inline HasPtrVal& HasPtrVal::operator=(HasPtrVal rhs) {
+    swap(*this, rhs);
+    return *this;
+}
+*/
+
+inline void HasPtrVal::swap(HasPtrVal &rhs) noexcept {
+    using std::swap;
+    swap(ps, rhs.ps);
+    swap(i, rhs.i);
+    std::cout << "...HasPtrVal::swap..." << std::endl;
+}
+
+inline void swap(HasPtrVal &lhs, HasPtrVal &rhs) noexcept{
+    using std::swap;
+    swap(lhs.ps, rhs.ps); // 交换指针而不是交换string数据
+    swap(lhs.i, rhs.i);
+    std::cout << "...swap..." << std::endl;
+    //std::swap(lhs.ps, rhs.ps); // ❌ 这样写就使用了标准库版本的swap，而不是HasPtrVal的swap
+}
+
+inline std::ostream & operator<<(std::ostream &os, const HasPtrVal &hp) {
+    os << "(" << *hp.ps << " " << hp.i << ")";
+    return os;
+}
+
+
+
+
+
+
 
 // 行为像指针的类
 class HasPtrPtr {

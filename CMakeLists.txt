@@ -268,4 +268,6 @@ add_executable(C___Primer main.cpp
         chapter_13/listing_copy_control.cpp
         chapter_13/test_13_5.cpp
         chapter_13/test_13_28.cpp
+        chapter_13/test_13_30.cpp
+        chapter_13/test_13_31.cpp
 )
