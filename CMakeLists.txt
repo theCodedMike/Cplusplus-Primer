@@ -15,6 +15,10 @@ add_executable(C___Primer main.cpp
         include/PersonInfo.h
         include/StrBlob.h
         include/TextQuery.h
+        include/Employee.h
+        include/HasPtr.h
+        include/TreeNode.h
+        include/BinStrTree.h
 
         chapter_1/listing_io.cpp
         chapter_1/listing_comment.cpp
@@ -263,5 +267,5 @@ add_executable(C___Primer main.cpp
 
         chapter_13/listing_copy_control.cpp
         chapter_13/test_13_5.cpp
-        include/Employee.h
+        chapter_13/test_13_28.cpp
 )
