@@ -19,6 +19,8 @@ add_executable(C___Primer main.cpp
         include/HasPtr.h
         include/TreeNode.h
         include/BinStrTree.h
+        include/Message.h
+        include/Folder.h
 
         chapter_1/listing_io.cpp
         chapter_1/listing_comment.cpp
