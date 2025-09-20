@@ -21,6 +21,7 @@ add_executable(C___Primer main.cpp
         include/BinStrTree.h
         include/Message.h
         include/Folder.h
+        include/StrVec.h
 
         chapter_1/listing_io.cpp
         chapter_1/listing_comment.cpp
@@ -272,4 +273,5 @@ add_executable(C___Primer main.cpp
         chapter_13/test_13_28.cpp
         chapter_13/test_13_30.cpp
         chapter_13/test_13_31.cpp
+        chapter_13/test_13_39.cpp
 )
