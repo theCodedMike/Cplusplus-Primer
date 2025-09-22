@@ -17,9 +17,11 @@ class HasPtrVal {
 public:
     explicit HasPtrVal(const std::string &s = std::string(), const int i = 0)
         : ps(new std::string(s)), i(i) {}
-    HasPtrVal(const HasPtrVal &hp);
-    HasPtrVal& operator=(const HasPtrVal &hp);
-    //HasPtrVal &operator=(HasPtrVal rhs);
+    HasPtrVal(const HasPtrVal &hp); // 拷贝构造
+    HasPtrVal& operator=(const HasPtrVal &hp); // 拷贝赋值
+    HasPtrVal &operator=(HasPtrVal rhs); // 移动赋值 + 拷贝赋值
+    HasPtrVal(HasPtrVal &&) noexcept; // 移动构造
+    HasPtrVal& operator=(HasPtrVal &&) noexcept;
     ~HasPtrVal() {delete ps;}
 
     bool operator<(const HasPtrVal &rhs) const {
@@ -48,12 +50,17 @@ inline HasPtrVal& HasPtrVal::operator=(const HasPtrVal &hp) {
     i = hp.i;
     return *this;
 }
-/*
+
 inline HasPtrVal& HasPtrVal::operator=(HasPtrVal rhs) {
-    swap(*this, rhs);
+    this->swap(rhs);
     return *this;
 }
-*/
+
+inline HasPtrVal::HasPtrVal(HasPtrVal && hp) noexcept
+    : ps(hp.ps), i(hp.i)
+{
+    hp.ps = nullptr;
+}
 
 inline void HasPtrVal::swap(HasPtrVal &rhs) noexcept {
     using std::swap;
