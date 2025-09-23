@@ -27,13 +27,19 @@ public:
     }
     // 只声明，没有定义
     Sales_data& combine(const Sales_data&);
-    double avg_price() const;
+    [[nodiscard]] double avg_price() const;
+
+    Sales_data & operator+=(const Sales_data &rhs);
+
+
 
 // friend
     friend Sales_data add(const Sales_data &, const Sales_data &);
+    friend Sales_data operator+(const Sales_data &lhs, const Sales_data &rhs);
     friend std::ostream & print(std::ostream &, const Sales_data &);
     friend std::istream & read(std::istream &, Sales_data &);
-
+    friend std::ostream & operator<<(std::ostream &os, const Sales_data &rhs);
+    friend std::istream & operator>>(std::istream &is, Sales_data &rhs);
 };
 
 inline Sales_data::Sales_data(const Sales_data &orig) :
@@ -58,6 +64,11 @@ inline Sales_data& Sales_data::combine(const Sales_data &rhs) {
 inline double Sales_data::avg_price() const {
     return units_sold ? revenue / units_sold : 0;
 }
+
+inline Sales_data &Sales_data::operator+=(const Sales_data &rhs) {
+    return combine(rhs);
+}
+
 
 
 
@@ -99,5 +110,15 @@ inline bool eq_op(const Sales_data &lhs, const Sales_data &rhs) {
     return lhs.isbn() == rhs.isbn();
 }
 
+inline std::ostream & operator<<(std::ostream &os, const Sales_data &rhs) {
+    return print(os, rhs);
+}
 
+inline std::istream & operator>>(std::istream &is, Sales_data &rhs) {
+    return read(is, rhs);
+}
+
+inline Sales_data operator+(const Sales_data &lhs, const Sales_data &rhs) {
+    return add(lhs, rhs);
+}
 #endif //SALES_DATA_H
