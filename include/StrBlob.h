@@ -40,6 +40,9 @@ public:
     [[nodiscard]] std::string & back() const;
     [[nodiscard]] StrBlobPtr begin() const;
     [[nodiscard]] StrBlobPtr end() const;
+
+    bool operator==(const StrBlob &) const;
+    bool operator!=(const StrBlob &) const;
 };
 
 inline StrBlob::StrBlob()
@@ -66,6 +69,21 @@ inline std::string &StrBlob::back() const {
 inline void StrBlob::pop_back() const {
     check(0, "pop_back on empty StrBlob");
     data->pop_back();
+}
+
+inline bool StrBlob::operator==(const StrBlob &rhs) const {
+    if (size() != rhs.size())
+        return false;
+    for (size_type i = 0, sz = size(); i < sz; ++i) {
+        if (data->at(i) != rhs.data->at(i))
+            return false;
+    }
+
+    return true;
+}
+
+inline bool StrBlob::operator!=(const StrBlob &rhs) const {
+    return !(*this == rhs);
 }
 
 /////////////////////////////// StrBlobPtr /////////////////////////////////
@@ -110,6 +128,5 @@ inline StrBlobPtr StrBlob::begin() const {
 inline StrBlobPtr StrBlob::end() const {
     return StrBlobPtr(*this, data->size());
 }
-
 
 #endif //STRBLOB_H

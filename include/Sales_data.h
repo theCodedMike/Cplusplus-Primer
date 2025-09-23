@@ -30,8 +30,8 @@ public:
     [[nodiscard]] double avg_price() const;
 
     Sales_data & operator+=(const Sales_data &rhs);
-
-
+    bool operator==(const Sales_data &) const;
+    bool operator!=(const Sales_data &) const;
 
 // friend
     friend Sales_data add(const Sales_data &, const Sales_data &);
@@ -69,7 +69,15 @@ inline Sales_data &Sales_data::operator+=(const Sales_data &rhs) {
     return combine(rhs);
 }
 
+inline bool Sales_data::operator==(const Sales_data & rhs) const {
+    return units_sold == rhs.units_sold &&
+           revenue == rhs.revenue &&
+           bookNo == rhs.bookNo;
+}
 
+inline bool Sales_data::operator!=(const Sales_data & rhs) const {
+    return !(*this == rhs);
+}
 
 
 Sales_data add(const Sales_data &, const Sales_data &);

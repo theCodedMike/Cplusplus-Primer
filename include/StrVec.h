@@ -49,6 +49,8 @@ public:
     std::string &back() const {
         return *(first_free - 1);
     }
+    bool operator==(const StrVec &) const;
+    bool operator!=(const StrVec &) const;
 private:
     inline static size_t default_cap = 4;
     inline static std::allocator<std::string> alloc; // 分配元素
@@ -105,12 +107,10 @@ inline StrVec &StrVec::operator=(StrVec && rhs) noexcept {
     return *this;
 }
 
-
 inline StrVec::StrVec(const std::initializer_list<std::string> &il) {
     std::tie(elements, cap) = alloc_n_copy(il.begin(), il.end());
     first_free = cap;
 }
-
 
 inline StrVec::~StrVec() {
     free();
@@ -138,6 +138,7 @@ inline void StrVec::reserve(const size_t new_cap) {
 
     reallocate(new_cap);
 }
+
 inline void StrVec::resize(const size_t new_size, const std::string &val) {
     if (const size_t sz = size(); new_size < sz) {
         for (auto i = new_size; i < sz; ++i)
@@ -148,6 +149,24 @@ inline void StrVec::resize(const size_t new_size, const std::string &val) {
             push_back(val);
     }
 }
+
+inline bool StrVec::operator==(const StrVec & rhs) const {
+    if (size() != rhs.size())
+        return false;
+    auto l_beg = begin();
+    auto r_beg = rhs.begin();
+    for (; l_beg != end(); ++l_beg, ++r_beg) {
+        if (*l_beg != *r_beg)
+            return false;
+    }
+
+    return true;
+}
+
+inline bool StrVec::operator!=(const StrVec & rhs) const {
+    return !(*this == rhs);
+}
+
 
 inline void StrVec::free() const {
     if (elements != nullptr) {
