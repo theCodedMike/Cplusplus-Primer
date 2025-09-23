@@ -5,6 +5,7 @@
 #ifndef SALES_DATA_H
 #define SALES_DATA_H
 #include <string>
+#include <utility>
 
 class Sales_data {
     std::string bookNo;
@@ -13,16 +14,17 @@ class Sales_data {
 public:
     Sales_data() = default;
     //Sales_data() : Sales_data("", 0, 0) {} // 委托构造函数
-    Sales_data(const std::string &s) : Sales_data(s, 0, 0) {}
-    Sales_data(const std::string &s, unsigned n, double p)
-        : bookNo(s), units_sold(n), revenue(p * n) {}
+    explicit Sales_data(const std::string &s) : Sales_data(s, 0, 0) {}
+    Sales_data(std::string s, const unsigned n, const double p)
+        : bookNo(std::move(s)), units_sold(n), revenue(p * n) {}
     explicit Sales_data(std::istream &); // explicit可以避免隐式类类型转换
     Sales_data(const Sales_data &); // 拷贝构造函数
     Sales_data& operator=(const Sales_data&);// 拷贝赋值函数
+    Sales_data& operator=(const std::string &s);
     ~Sales_data() = default; // 析构函数
 
     // 既声明也定义，也是内联函数
-    std::string isbn() const {
+    [[nodiscard]] const std::string &isbn() const {
         return bookNo; // 等价于 this->bookNo;
     }
     // 只声明，没有定义
@@ -52,6 +54,11 @@ inline Sales_data& Sales_data::operator=(const Sales_data &rhs) {
     bookNo = rhs.bookNo;
     units_sold = rhs.units_sold;
     revenue = rhs.revenue;
+    return *this;
+}
+
+inline Sales_data& Sales_data::operator=(const std::string &s) {
+    bookNo = s;
     return *this;
 }
 

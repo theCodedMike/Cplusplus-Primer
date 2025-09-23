@@ -14,6 +14,7 @@ public:
     StrVec(StrVec &&) noexcept ; // 移动构造函数
     StrVec &operator=(StrVec &&) noexcept; // 移动赋值运算符
     StrVec(const std::initializer_list<std::string> &);
+    StrVec &operator=(const std::initializer_list<std::string> &);
     ~StrVec(); // 析构函数
 
     void push_back(const std::string &); // 拷贝元素
@@ -112,6 +113,14 @@ inline StrVec::StrVec(const std::initializer_list<std::string> &il) {
     first_free = cap;
 }
 
+inline StrVec &StrVec::operator=(const std::initializer_list<std::string> &il) {
+    const auto data = alloc_n_copy(il.begin(), il.end());
+    free();
+    elements = data.first;
+    first_free = cap = data.second;
+    return *this;
+}
+
 inline StrVec::~StrVec() {
     free();
 }
@@ -166,7 +175,6 @@ inline bool StrVec::operator==(const StrVec & rhs) const {
 inline bool StrVec::operator!=(const StrVec & rhs) const {
     return !(*this == rhs);
 }
-
 
 inline void StrVec::free() const {
     if (elements != nullptr) {
