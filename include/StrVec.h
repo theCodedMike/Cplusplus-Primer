@@ -52,6 +52,12 @@ public:
     }
     bool operator==(const StrVec &) const;
     bool operator!=(const StrVec &) const;
+    std::string & operator[](const std::size_t n) {
+        return elements[n];
+    }
+    const std::string & operator[](const std::size_t n) const {
+        return elements[n];
+    }
 private:
     inline static size_t default_cap = 4;
     inline static std::allocator<std::string> alloc; // 分配元素

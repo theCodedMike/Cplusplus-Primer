@@ -274,6 +274,8 @@ add_executable(C___Primer main.cpp
         chapter_13/test_13_30.cpp
         chapter_13/test_13_31.cpp
         chapter_13/test_13_39.cpp
+
+        chapter_14/listing_overloaded_operations.cpp
         chapter_14/test_14_2.cpp
         chapter_14/test_14_3.cpp
         chapter_14/test_14_16.cpp

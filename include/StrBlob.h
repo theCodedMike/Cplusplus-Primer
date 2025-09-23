@@ -14,9 +14,6 @@ class StrBlob {
     friend class StrBlobPtr;
     using size_type = std::vector<std::string>::size_type;
 
-    std::shared_ptr<std::vector<std::string>> data;
-    void check(size_type i, const std::string &msg) const;
-
 public:
     StrBlob();
     StrBlob(std::initializer_list<std::string> il);
@@ -43,6 +40,16 @@ public:
 
     bool operator==(const StrBlob &) const;
     bool operator!=(const StrBlob &) const;
+    std::string & operator[](const std::size_t n) {
+        return (*data)[n];
+    }
+    const std::string & operator[](const std::size_t n) const {
+        return (*data)[n];
+    }
+
+private:
+    std::shared_ptr<std::vector<std::string>> data;
+    void check(size_type i, const std::string &msg) const;
 };
 
 inline StrBlob::StrBlob()
@@ -88,17 +95,32 @@ inline bool StrBlob::operator!=(const StrBlob &rhs) const {
 
 /////////////////////////////// StrBlobPtr /////////////////////////////////
 class StrBlobPtr {
-    [[nodiscard]]
-    std::shared_ptr<std::vector<std::string>> check(std::size_t, const std::string &) const;
-    std::weak_ptr<std::vector<std::string>> wptr;
-    std::size_t curr; // 在数组中的当前位置
+    friend std::ostream & operator<<(std::ostream &, const StrBlobPtr &);
 
 public:
     StrBlobPtr() : curr(0) {}
     explicit StrBlobPtr(const StrBlob &sb, const size_t sz = 0) : wptr(sb.data), curr(sz) {}
     [[nodiscard]] std::string & deref() const;
     StrBlobPtr & incr();
+
+    StrBlobPtr & operator++(); // 前置运算
+    StrBlobPtr & operator--();
+    StrBlobPtr operator++(int); // 后置运算
+    StrBlobPtr operator--(int);
+
+private:
+    [[nodiscard]]
+    std::shared_ptr<std::vector<std::string>> check(std::size_t, const std::string &) const;
+    std::weak_ptr<std::vector<std::string>> wptr;
+    std::size_t curr; // 在数组中的当前位置
+
 };
+
+inline std::ostream &operator<<(std::ostream & os, const StrBlobPtr & sbp) {
+    os << sbp.deref();
+    return os;
+}
+
 
 inline std::shared_ptr<std::vector<std::string>> StrBlobPtr::check(const std::size_t i, const std::string &msg) const {
     if (wptr.expired())
@@ -115,11 +137,10 @@ inline std::string & StrBlobPtr::deref() const {
 }
 
 inline StrBlobPtr & StrBlobPtr::incr() {
-    auto p = check(curr, "increment past end of StrBlobPtr");
+    auto _ = check(curr, "increment past end of StrBlobPtr");
     ++curr;
     return *this;
 }
-
 
 inline StrBlobPtr StrBlob::begin() const {
     return StrBlobPtr(*this);
@@ -127,6 +148,31 @@ inline StrBlobPtr StrBlob::begin() const {
 
 inline StrBlobPtr StrBlob::end() const {
     return StrBlobPtr(*this, data->size());
+}
+
+inline StrBlobPtr &StrBlobPtr::operator++() {
+    auto _ = check(curr, "increment past end of StrBlobPtr");
+    ++curr;
+    return *this;
+}
+
+inline StrBlobPtr &StrBlobPtr::operator--() {
+    --curr;
+    auto _ = check(curr, "decrement past begin of StrBlobPtr");
+    return *this;
+}
+
+// 使用前置运算符时才需要检查
+inline StrBlobPtr StrBlobPtr::operator++(int) {
+    StrBlobPtr ret = *this;
+    ++*this;
+    return ret;
+}
+
+inline StrBlobPtr StrBlobPtr::operator--(int) {
+    StrBlobPtr ret = *this;
+    --*this;
+    return ret;
 }
 
 #endif //STRBLOB_H
