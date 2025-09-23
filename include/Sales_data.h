@@ -85,7 +85,10 @@ inline Sales_data add(const Sales_data &lhs, const Sales_data &rhs) {
 inline std::istream & read(std::istream &is, Sales_data &item) {
     double price = 0;
     is >> item.bookNo >> item.units_sold >> price;
-    item.revenue = price * item.units_sold;
+    if (is)
+        item.revenue = price * item.units_sold;
+    else
+        item = Sales_data(); // 输入失败，对象被赋予默认状态
     return is;
 }
 
