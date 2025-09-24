@@ -280,4 +280,11 @@ add_executable(C___Primer main.cpp
         chapter_14/test_14_3.cpp
         chapter_14/test_14_16.cpp
         chapter_14/test_14_22.cpp
+        chapter_14/test_14_34.cpp
+        chapter_14/test_14_35.cpp
+        chapter_14/test_14_37.cpp
+        chapter_14/test_14_38.cpp
+        chapter_14/test_14_40.cpp
+        chapter_14/test_14_42.cpp
+        chapter_14/test_14_43.cpp
 )

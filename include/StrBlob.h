@@ -107,6 +107,13 @@ public:
     StrBlobPtr & operator--();
     StrBlobPtr operator++(int); // 后置运算
     StrBlobPtr operator--(int);
+    std::string & operator*() const {
+        const auto p = check(curr, "dereference past end");
+        return (*p)[curr];
+    }
+    std::string * operator->() const {
+        return & this->operator*();
+    }
 
 private:
     [[nodiscard]]
