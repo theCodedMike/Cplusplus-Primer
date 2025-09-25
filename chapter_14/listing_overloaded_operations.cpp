@@ -24,6 +24,24 @@ private:
     char sep;
 };
 
+class SmallInt {
+    friend SmallInt operator+(const SmallInt &lhs, const SmallInt &rhs);
+public:
+    SmallInt(const int i = 0) : val(i) {
+        if (i < 0 || i > 255)
+            throw out_of_range("Bad SmallInt value");
+    }
+    explicit operator int() const { // 无返回值，无参数列表
+        return val;
+    }
+private:
+    size_t val;
+};
+
+inline SmallInt operator+(const SmallInt &lhs, const SmallInt &rhs) {
+    return {static_cast<int>(lhs.val + rhs.val)};
+}
+
 int main(int argc, char *argv[]) {
     // 输入和输出运算符
     //Sales_data sd;
@@ -115,6 +133,16 @@ int main(int argc, char *argv[]) {
         {"%", mod} // 命名的lambda
     };
     cout << binops["+"](6, 2) << endl; // 8
+
+    // 类型转换运算符
+    SmallInt si;
+    si = 4; // 首先将4隐式地转换成SmallInt，然后调用SmallInt::operator=
+    //auto _ =  si + 3; // 如果没有explicit, 首先将si隐式地转换成int，然后执行整数的加法
+    auto res = static_cast<int>(si) + 3; // 显式的类型转换
+    cout << res << endl; // 7
+    SmallInt tmp1, tmp2;
+    SmallInt tmp3 = tmp1 + tmp2; // 使用重载的operator+
+    //int i = tmp3 + 0; // 有二义性，需要避免
 }
 
 int add(const int i, const int j) {

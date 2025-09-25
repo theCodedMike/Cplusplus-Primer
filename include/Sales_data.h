@@ -8,9 +8,14 @@
 #include <utility>
 
 class Sales_data {
-    std::string bookNo;
-    unsigned units_sold = 0;
-    double revenue = 0.0;
+    // friend
+    friend Sales_data add(const Sales_data &, const Sales_data &);
+    friend Sales_data operator+(const Sales_data &lhs, const Sales_data &rhs);
+    friend std::ostream & print(std::ostream &, const Sales_data &);
+    friend std::istream & read(std::istream &, Sales_data &);
+    friend std::ostream & operator<<(std::ostream &os, const Sales_data &rhs);
+    friend std::istream & operator>>(std::istream &is, Sales_data &rhs);
+
 public:
     Sales_data() = default;
     //Sales_data() : Sales_data("", 0, 0) {} // 委托构造函数
@@ -34,14 +39,14 @@ public:
     Sales_data & operator+=(const Sales_data &rhs);
     bool operator==(const Sales_data &) const;
     bool operator!=(const Sales_data &) const;
+    explicit operator const std::string &() const;
+    explicit operator double() const;
+    explicit operator bool() const;
 
-// friend
-    friend Sales_data add(const Sales_data &, const Sales_data &);
-    friend Sales_data operator+(const Sales_data &lhs, const Sales_data &rhs);
-    friend std::ostream & print(std::ostream &, const Sales_data &);
-    friend std::istream & read(std::istream &, Sales_data &);
-    friend std::ostream & operator<<(std::ostream &os, const Sales_data &rhs);
-    friend std::istream & operator>>(std::istream &is, Sales_data &rhs);
+private:
+    std::string bookNo;
+    unsigned units_sold = 0;
+    double revenue = 0.0;
 };
 
 inline Sales_data::Sales_data(const Sales_data &orig) :
@@ -86,6 +91,21 @@ inline bool Sales_data::operator!=(const Sales_data & rhs) const {
     return !(*this == rhs);
 }
 
+inline Sales_data::operator double() const {
+    return revenue;
+}
+
+inline Sales_data::operator const std::string &() const {
+    return bookNo;
+}
+
+inline Sales_data::operator bool() const {
+    return !bookNo.empty() && units_sold > 0 && revenue > 0;
+}
+
+
+
+
 
 Sales_data add(const Sales_data &, const Sales_data &);
 std::ostream & print(std::ostream &, const Sales_data &);
@@ -112,7 +132,8 @@ inline std::ostream & print(std::ostream &os, const Sales_data &item) {
        << item.revenue << " " << item.avg_price();
     return os;
 }
-Sales_data::Sales_data(std::istream &is) {
+
+inline Sales_data::Sales_data(std::istream &is) {
     read(is, *this);
 }
 
