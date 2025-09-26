@@ -43,24 +43,35 @@ inline void Quote::debug() const {
 
 
 
+class Disc_quote : public Quote {
+public:
+    Disc_quote() = default;
+    Disc_quote(std::string book, const double price, const std::size_t qty, const double disc) :
+        Quote(std::move(book), price), quantity(qty), discount(disc) { }
+
+    [[nodiscard]] double net_price(std::size_t) const = 0; // 纯虚函数，函数体必须在类外定义
+protected:
+    std::size_t quantity = 0; // 折扣适用的购买量
+    double discount = 0.0; // 折扣
+};
 
 
-class Bulk_quote final: public Quote { // Bulk_quote继承了Quote
+
+
+
+
+class Bulk_quote final: public Disc_quote { // Bulk_quote继承了Quote
 public:
     Bulk_quote() = default;
-    Bulk_quote(const std::string &book, const double p, const std::size_t qty, const double disc) :
-        Quote(book, p), min_qty(qty), discount(disc) {}
+    Bulk_quote(std::string book, const double price, const std::size_t qty, const double disc) :
+        Disc_quote(std::move(book), price, qty, disc) {}
 
     [[nodiscard]] double net_price(std::size_t) const override; // 可以重写，也可以继续声明为虚函数
     void debug() const override;
-
-private:
-    std::size_t min_qty = 0; // 适用折扣政策的最低购买量
-    double discount = 0.0; // 折扣额
 };
 
 inline double Bulk_quote::net_price(const std::size_t cnt) const {
-    if (cnt >= min_qty)
+    if (cnt >= quantity)
         return cnt * (1 - discount) * price;
 
     return cnt * price;
@@ -68,9 +79,11 @@ inline double Bulk_quote::net_price(const std::size_t cnt) const {
 
 inline void Bulk_quote::debug() const {
     Quote::debug();
-    std::cout << "min_qty: " << min_qty << std::endl;
+    std::cout << "min_qty: " << quantity << std::endl;
     std::cout << "discount: " << discount << std::endl;
 }
+
+
 
 
 

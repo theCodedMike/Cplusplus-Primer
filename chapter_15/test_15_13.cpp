@@ -13,7 +13,7 @@ public:
     virtual ~Base() = default;
 
     const string & name() { return basename; }
-    virtual void print(ostream &os) {
+    virtual void print(ostream &os) const {
         os << basename;
     }
 private:
@@ -24,7 +24,7 @@ class Derived final : public Base {
 public:
     Derived(string s, const int i) : Base(std::move(s)), i(i) { }
 
-    void print(ostream &os) override {
+    void print(ostream &os) const override {
         Base::print(os);
         os << " " << i;
     }
@@ -33,10 +33,10 @@ private:
 };
 
 int main(int argc, char *argv[]) {
-    Base base("base");
+    const Base base("base");
     base.print(cout);
     cout << endl << endl;;
 
-    Derived derived("derived", 42);
+    const Derived derived("derived", 42);
     derived.print(cout);
 }
