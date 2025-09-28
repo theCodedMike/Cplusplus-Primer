@@ -294,4 +294,7 @@ add_executable(C___Primer main.cpp
         chapter_15/test_15_11.cpp
         chapter_15/test_15_13.cpp
         chapter_15/test_15_17.cpp
+        chapter_15/test_15_28.cpp
+        chapter_15/test_15_29.cpp
+        chapter_15/test_15_30.cpp
 )
