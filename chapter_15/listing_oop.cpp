@@ -3,10 +3,10 @@
 //
 #include <iostream>
 #include <memory>
-#include <queue>
 #include <vector>
 
 #include "../include/Quote.h"
+#include "../include/TextQuery.h"
 
 using namespace std;
 
@@ -65,7 +65,7 @@ void clobber(Base & b) {
 
 
 
-
+void text_query();
 
 
 int main(int argc, char *argv[]) {
@@ -90,4 +90,30 @@ int main(int argc, char *argv[]) {
     vector<shared_ptr<Quote>> basket; // 使用容器存储对象时，推荐使用shared_ptr
     basket.push_back(make_shared<Bulk_quote>(derived));
     cout << basket.back()->net_price(10) << endl; // 79.92
+
+
+    text_query();
+}
+
+void run_queries(ifstream & infile) {
+    const TextQuery tq(infile);
+
+    while (true) {
+        cout << "Executing query for(or q to quit): ";
+        string s;
+        if (!(cin >> s) || s == "q")
+            break;
+        // TODO: 解析s
+        print(cout, tq.query(s)) << endl;
+    }
+}
+void text_query() {
+    const string file_path = "./listing_oop.txt";
+    ifstream infile(file_path);
+    if (!infile.is_open()) {
+        cerr << "cannot open file" + file_path << endl;
+        return;
+    }
+
+    run_queries(infile);
 }
