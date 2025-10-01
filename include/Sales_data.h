@@ -39,6 +39,8 @@ public:
     Sales_data & operator+=(const Sales_data &rhs);
     bool operator==(const Sales_data &) const;
     bool operator!=(const Sales_data &) const;
+    bool operator<(const Sales_data &) const;
+    bool operator>(const Sales_data &) const;
     explicit operator const std::string &() const;
     explicit operator double() const;
     explicit operator bool() const;
@@ -89,6 +91,20 @@ inline bool Sales_data::operator==(const Sales_data & rhs) const {
 
 inline bool Sales_data::operator!=(const Sales_data & rhs) const {
     return !(*this == rhs);
+}
+
+inline bool Sales_data::operator<(const Sales_data & rhs) const {
+    if (bookNo < rhs.bookNo)
+        return true;
+    if (bookNo == rhs.bookNo && units_sold < rhs.units_sold)
+        return true;
+    if (bookNo == rhs.bookNo && units_sold == rhs.units_sold && revenue < rhs.revenue)
+        return true;
+    return false;
+}
+
+inline bool Sales_data::operator>(const Sales_data & rhs) const {
+    return rhs < *this;
 }
 
 inline Sales_data::operator double() const {

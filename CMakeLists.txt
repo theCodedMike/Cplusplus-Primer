@@ -297,4 +297,10 @@ add_executable(C___Primer main.cpp
         chapter_15/test_15_28.cpp
         chapter_15/test_15_29.cpp
         chapter_15/test_15_30.cpp
+
+        chapter_16/listing_templates_generic.cpp
+        chapter_16/test_16_3.cpp
+        chapter_16/test_16_4.cpp
+        chapter_16/test_16_5.cpp
+        chapter_16/test_16_7.cpp
 )
