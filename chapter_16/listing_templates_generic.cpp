@@ -6,14 +6,18 @@
 #include <string>
 #include <cstring>
 
+#include "../include/Blob.h"
+
 using namespace std;
 
 
 void function_template();
+void class_template();
+
 
 int main(int argc, char *argv[]) {
-    function_template();
-
+    //function_template();
+    class_template();
 
 }
 
@@ -47,4 +51,14 @@ void function_template() {
     cout << compare2("hi", "mom") << endl; // -1
 
     cout << compare3("hello", "lello") << endl; // 1
+}
+
+void class_template() {
+    Blob ib = {1, 4, -10};
+    const initializer_list<string> is = {"hello", "world", "c++", "java"};
+    Blob sb(is);
+    for (auto i = 0; i < sb.size(); ++i)
+        cout << sb[i] << " ";
+    cout << endl;
+    cout << sb << endl;
 }

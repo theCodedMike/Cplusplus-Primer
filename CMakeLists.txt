@@ -23,6 +23,7 @@ add_executable(C___Primer main.cpp
         include/Folder.h
         include/StrVec.h
         include/Quote.h
+        include/Blob.h
 
         chapter_1/listing_io.cpp
         chapter_1/listing_comment.cpp
@@ -303,4 +304,6 @@ add_executable(C___Primer main.cpp
         chapter_16/test_16_4.cpp
         chapter_16/test_16_5.cpp
         chapter_16/test_16_7.cpp
+        chapter_16/test_16_19.cpp
+        chapter_16/test_16_20.cpp
 )
