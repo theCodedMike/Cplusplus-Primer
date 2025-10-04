@@ -62,3 +62,22 @@ void class_template() {
     cout << endl;
     cout << sb << endl;
 }
+
+// 模板实参推断
+template <typename T> void f1(T &);
+template <typename T> void f2(const T&);
+template <typename T> void f3(T &&);
+void deduce_template_argument() {
+    int i = 10;
+    const int ci = 10;
+
+    f1(i); // i是一个int；模板参数类型T是int
+    f1(ci); // ci是一个const int；模板参数T是const int
+    //f1(5); // ❌ 传递给一个&参数的实参必须是一个左值
+
+    f2(i); // i是一个int；模板参数T是int
+    f2(ci); // ci是一个const int，但模板参数T是int
+    f2(5); // 一个const &参数可以绑定到一个右值；T是int
+
+    f3(5); // 实参是一个int类型的右值；模板参数T是int
+}
