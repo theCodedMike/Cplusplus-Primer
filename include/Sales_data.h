@@ -15,6 +15,7 @@ class Sales_data {
     friend std::istream & read(std::istream &, Sales_data &);
     friend std::ostream & operator<<(std::ostream &os, const Sales_data &rhs);
     friend std::istream & operator>>(std::istream &is, Sales_data &rhs);
+    friend struct std::hash<Sales_data>;
 
 public:
     Sales_data() = default;
@@ -176,4 +177,22 @@ inline std::istream & operator>>(std::istream &is, Sales_data &rhs) {
 inline Sales_data operator+(const Sales_data &lhs, const Sales_data &rhs) {
     return add(lhs, rhs);
 }
+
+// 模板特例
+namespace std {
+    template <>
+    struct hash<Sales_data> {
+        using result_type = size_t;
+        using argument_type = Sales_data;
+
+        size_t operator()(const Sales_data& s) const noexcept;
+    };
+
+    inline size_t hash<Sales_data>::operator()(const Sales_data &s) const noexcept {
+        return hash<string>()(s.bookNo) ^
+               hash<unsigned>()(s.units_sold) ^
+               hash<double>()(s.revenue);
+    }
+}
+
 #endif //SALES_DATA_H

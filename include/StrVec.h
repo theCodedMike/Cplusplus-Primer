@@ -58,6 +58,7 @@ public:
     const std::string & operator[](const std::size_t n) const {
         return elements[n];
     }
+    template <typename... Args> void emplace_back(Args&&...);
 private:
     inline static size_t default_cap = 4;
     inline static std::allocator<std::string> alloc; // 分配元素
@@ -191,6 +192,13 @@ inline void StrVec::free() const {
         alloc.deallocate(elements, cap - elements);
     }
 }
+
+template<typename... Args>
+void StrVec::emplace_back(Args &&... args) {
+    check_n_alloc();
+    std::allocator_traits<std::allocator<std::string>>::construct(alloc, first_free++, std::forward<Args>(args)...);
+}
+
 
 /*
 // 未使用移动迭代器

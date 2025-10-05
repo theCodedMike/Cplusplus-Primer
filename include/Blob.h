@@ -182,7 +182,7 @@ bool operator==(const BlobPtr<T>&, const BlobPtr<T>&);
 
 template <typename T>
 class BlobPtr {
-    friend bool operator==(const BlobPtr&, const BlobPtr&);
+    friend bool operator==<T>(const BlobPtr&, const BlobPtr&);
 
 public:
     BlobPtr() : curr(0) {}

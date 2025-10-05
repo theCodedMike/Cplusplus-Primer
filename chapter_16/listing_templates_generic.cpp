@@ -7,18 +7,23 @@
 #include <cstring>
 
 #include "../include/Blob.h"
+#include "../include/Sales_data.h"
 
 using namespace std;
 
 
 void function_template();
 void class_template();
-
+void deduce_template_argument();
+void variadic_templates();
+void template_specialization();
 
 int main(int argc, char *argv[]) {
     //function_template();
-    class_template();
-
+    //class_template();
+    //deduce_template_argument();
+    //variadic_templates();
+    template_specialization();
 }
 
 template <typename T>
@@ -64,9 +69,9 @@ void class_template() {
 }
 
 // 模板实参推断
-template <typename T> void f1(T &);
-template <typename T> void f2(const T&);
-template <typename T> void f3(T &&);
+template <typename T> void f1(T &) {}
+template <typename T> void f2(const T&) {}
+template <typename T> void f3(T &&) {}
 void deduce_template_argument() {
     int i = 10;
     const int ci = 10;
@@ -80,4 +85,60 @@ void deduce_template_argument() {
     f2(5); // 一个const &参数可以绑定到一个右值；T是int
 
     f3(5); // 实参是一个int类型的右值；模板参数T是int
+}
+
+// Args是一个模板参数包；rest是一个函数参数包
+// Args表示0或多个模板类型参数
+// rest表示0或多个函数参数
+template <typename T, typename... Args>
+void foo(const T &t, const Args &... rest) {
+    cout << t << endl;
+    cout << sizeof...(Args) << endl; // 类型参数的数目
+    cout << sizeof...(rest) << endl;
+}
+
+// 用来终止递归并打印最后一个元素的函数
+template <typename T>
+ostream &print(ostream &os, const T &t) {
+    os << t;
+    return os;
+}
+template <typename T, typename... Args>
+ostream &print(ostream &os, const T &t, const Args&... rest) { // 扩展Args
+    os << t << ", "; // 打印第一个实参
+    return print(os, rest...); // 递归调用，打印其他实参      // 拓展rest
+}
+void variadic_templates() {
+    int i = 0; double d = 3.14; string s = "hello world";
+    foo(i, s, 42, d);
+    foo(s, 42, "hi");
+    foo(d, s);
+    foo("hi");
+    // output:
+    // 0
+    // 3
+    // 3
+    // hello world
+    // 2
+    // 2
+    // 3.14
+    // 1
+    // 1
+    // hi
+    // 0
+    // 0
+    cout << endl;
+
+    print(cout, i, s, 42, d); // 0, hello world, 42, 3.14
+}
+
+// compare的特例化版本，只处理字符数组的指针
+template <>
+int compare(const char *const &p1, const char *const &p2) {
+    return strcmp(p1, p2);
+}
+void template_specialization() {
+    const char *p1 = "hi", *p2 = "hello";
+    cout << compare(p1, p2) << endl; // 调用特例版本
+    cout << compare2("hi", "hello") << endl;
 }
