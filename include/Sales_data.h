@@ -20,7 +20,7 @@ class Sales_data {
 public:
     Sales_data() = default;
     //Sales_data() : Sales_data("", 0, 0) {} // 委托构造函数
-    explicit Sales_data(const std::string &s) : Sales_data(s, 0, 0) {}
+    Sales_data(const std::string &s) : Sales_data(s, 0, 0) {}
     Sales_data(std::string s, const unsigned n, const double p)
         : bookNo(std::move(s)), units_sold(n), revenue(p * n) {}
     explicit Sales_data(std::istream &); // explicit可以避免隐式类类型转换

@@ -319,4 +319,8 @@ add_executable(C___Primer main.cpp
         chapter_16/test_16_58.cpp
         chapter_16/test_16_62.cpp
         chapter_16/test_16_63.cpp
+
+        chapter_17/listing_library_facilities.cpp
+        chapter_17/test_17_1.cpp
+        chapter_17/test_17_2.cpp
 )
