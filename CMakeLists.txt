@@ -323,4 +323,7 @@ add_executable(C___Primer main.cpp
         chapter_17/listing_library_facilities.cpp
         chapter_17/test_17_1.cpp
         chapter_17/test_17_2.cpp
+        chapter_17/test_17_9.cpp
+        chapter_17/test_17_10.cpp
+        chapter_17/test_17_11.cpp
 )

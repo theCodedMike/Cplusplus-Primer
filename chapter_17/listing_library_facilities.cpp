@@ -2,6 +2,7 @@
 // Created by lixia on 2025/10/5.
 //
 #include <algorithm>
+#include <bitset>
 #include <iostream>
 #include <string>
 #include <tuple>
@@ -16,10 +17,11 @@ using namespace std;
 
 
 void use_tuple();
-
+void use_bitset();
 
 int main(int argc, char *argv[]) {
-    use_tuple();
+    //use_tuple();
+    use_bitset();
 }
 
 void use_tuple() {
@@ -92,4 +94,37 @@ void report_results(istream &in, ostream &os, const vector<vector<Sales_data>> &
                << endl;
         }
     }
+}
+
+
+void use_bitset() {
+    constexpr bitset<32> bitvec(1U); // 32位，低位为1，其他位为0
+    cout << bitvec[0] << endl; // 1
+    cout << bitvec[31] << endl;// 0
+                            // 高位                         低位
+    cout << bitvec << endl; // 00000000000000000000000000000001
+    constexpr bitset<32> bitvec1(2); cout << bitvec1 << endl; // 00000000000000000000000000000010
+    constexpr bitset<32> bitvec2(3); cout << bitvec2 << endl; // 00000000000000000000000000000011
+    constexpr bitset<32> bitvec3(4); cout << bitvec3 << endl; // 00000000000000000000000000000100
+    constexpr bitset<32> bitvec4(5); cout << bitvec4 << endl; // 00000000000000000000000000000101
+    cout << endl;
+
+    string str("1111111000000011001101"); // 在pos范围内不能出现除0/1之外的字符，否则会抛出异常
+    bitset<32> bitvec5(str, 5, 4); cout << bitvec5 << endl; // 00000000000000000000000000001100
+    bitset<32> bitset6(str, str.size() - 4); cout << bitset6 << endl; // 00000000000000000000000000001101
+    string str2 = "2023";
+    //bitset<32> bitset7(str2); cout << bitset7 << endl; // std::invalid_argument
+    cout << endl;
+
+    cout << bitvec3.any() << endl; // 1
+    cout << bitvec3.all() << endl; // 0
+    cout << bitvec3.none() << endl; // 0
+    cout << bitvec3.count() << endl; // 1
+    cout << bitvec3.size() << endl; // 32
+    cout << bitvec3.test(0) << endl; // 0
+    cout << bitvec3._Find_first() << endl; // 2
+    cout << ~bitvec3 << endl; // 11111111111111111111111111111011
+    bitset<8> bitvec7;
+    cin >> bitvec7;
+    cout << bitvec7 << endl;
 }
