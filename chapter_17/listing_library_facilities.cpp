@@ -8,6 +8,7 @@
 #include <tuple>
 #include <map>
 #include <numeric>
+#include <regex>
 #include <vector>
 
 #include "../include/Sales_data.h"
@@ -18,10 +19,12 @@ using namespace std;
 
 void use_tuple();
 void use_bitset();
+void use_reg_exp();
 
 int main(int argc, char *argv[]) {
     //use_tuple();
-    use_bitset();
+    //use_bitset();
+    use_reg_exp();
 }
 
 void use_tuple() {
@@ -127,4 +130,64 @@ void use_bitset() {
     bitset<8> bitvec7;
     cin >> bitvec7;
     cout << bitvec7 << endl;
+}
+void identify_file() {
+    regex reg("[[:alnum:]]+\\.(cpp|cxx|cc)$", regex::icase); // xxx.cpp/cxx/cc
+    smatch results;
+    string filename;
+
+    while (cin >> filename) {
+        if (filename == "quit")
+            break;
+        if (regex_search(filename, results, reg))
+            cout << results.str() << endl;
+    }
+}
+void identify_word() {
+    string pattern("[^c]ei"); // 查找不在字符c之后的字符串ei
+    pattern = "[[:alpha:]]*" + pattern + "[[:alpha:]]*";
+    const string test_str = "receipt freind theif receive";
+    try {
+        const regex reg(pattern); // 构造一个用于查找模式的regex
+
+        if (smatch results; regex_search(test_str, results, reg)) // 寻找第一个匹配的子序列
+            cout << results.str() << endl; // 打印匹配的单词 freind
+    } catch (regex_error &e) {
+        cout << e.what() << ", code: " << e.code() << endl;
+    }
+}
+void reg_iterator() {
+    string pattern("[^c]ei");
+    pattern = "[[:alpha:]]*" + pattern + "[[:alpha:]]*";
+    regex r(pattern, regex::icase);
+    const string test_str = "receipt freind theif receive";
+
+    for (sregex_iterator iter(test_str.begin(), test_str.end(), r), end_iter; iter != end_iter; ++iter)
+        cout << iter->str() << " "; // freind theif
+}
+void sub_expr() {
+    const regex reg("([[:alnum:]]+)\\.(cpp|cxx|cc)$", regex::icase); // xxx.cpp/cxx/cc  由2个子表达式组成
+    smatch results;
+    const string filename = "main.cpp";
+
+    if (regex_search(filename.cbegin(), filename.cend(), results, reg)) {
+        cout << results.size() << endl; // 3
+        cout << results.str(0) << endl; // main.cpp
+        cout << results.str(1) << endl; // main
+        cout << results[2] << endl; // cpp
+    }
+}
+void reg_replace() {
+    const string phone_pattern = "((\\()?(\\d{3}) (\\))?([-. ])?(\\d{3}) ([-. ])?(\\d{4}))";
+    const regex r(phone_pattern);
+    const string phone_num = "(908) 555-1800";
+    const string fmt = "$2.$5.$7";
+    cout << regex_replace(phone_num, r, fmt) << endl; // 没起作用???
+}
+void use_reg_exp() {
+    //identify_word();
+    //identify_file();
+    //reg_iterator();
+    sub_expr();
+    //reg_replace();
 }
