@@ -3,6 +3,7 @@
 //
 #include <algorithm>
 #include <bitset>
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <tuple>
@@ -22,12 +23,14 @@ void use_tuple();
 void use_bitset();
 void use_reg_exp();
 void use_rand();
+void revisit_io_lib();
 
 int main(int argc, char *argv[]) {
     //use_tuple();
     //use_bitset();
     //use_reg_exp();
-    use_rand();
+    //use_rand();
+    revisit_io_lib();
 }
 
 void use_tuple() {
@@ -250,4 +253,66 @@ void use_rand() {
 
     //gen_normal_distribution();
     gen_bernoulli_distribution();
+}
+
+void formatted_io() {
+    // 操作符
+    cout << "default bool values: " << true << " " << false << endl; // 1 0
+    cout << "  alpha bool values: " << boolalpha << true << " " << false << endl; // true false
+
+    cout << "default: " << 20 << " " << 1024 << endl; // 20 1024
+    cout << "  octal: " << oct << 20 << " " << 1024 << endl; // 24 2000
+    cout << "    hex: " << hex << 20 << " " << 1024 << endl; // 14 400
+    cout << "decimal: " << dec << 20 << " " << 1024 << endl; // 20 1024
+
+    cout << showbase; // uppercase可以改变16进制的大小写
+    cout << "default: " << 20 << " " << 1024 << endl; // 20 1024
+    cout << "  octal: " << oct << 20 << " " << 1024 << endl; // 024 02000
+    cout << "    hex: " << hex << 20 << " " << 1024 << endl; // 0x14 0x400
+    cout << "decimal: " << dec << 20 << " " << 1024 << endl; // 20 1024
+    cout << noshowbase;
+
+
+    cout << "Precision: " << cout.precision() << ", Value: " << sqrt(2.0) << endl; // 6  1.41421
+    cout.precision(12); // cout << setprecision(12);
+    cout << "Precision: " << cout.precision() << ", Value: " << sqrt(2.0) << endl; // 12 1.41421356237
+
+    const double fval = 100 * sqrt(2.0);
+    cout << "default format: " << fval << endl // 141.421356237
+         << "scientific: " << scientific << fval << endl // 1.414213562373e+02
+         << "fixed: " << fixed << fval << endl // 141.421356237310
+         << "hexa: " << hexfloat << fval << endl // 0x1.1ad7bc01366b8p+7
+         << "defaults: " << defaultfloat << fval << endl; // 141.421356237
+}
+void unformatted_io() {}
+
+int random_access_stream() {
+    fstream inOut("copyOut", fstream::ate | fstream::in | fstream::out);
+    if (!inOut) {
+        cerr << "Unable to open file!" << endl;
+        return EXIT_FAILURE;
+    }
+
+    const auto end_mark = inOut.tellg(); // 记住原文件尾位置
+    inOut.seekg(0, fstream::beg); // 重定位到文件开始
+    size_t cnt = 0; // 字节数累加器
+    string line; // 保存输入中的每行
+    while (inOut && inOut.tellg() != end_mark && getline(inOut, line)) {
+        cnt += line.size() + 1; // 加1表示换行符
+        auto mark = inOut.tellg(); // 记住读取位置
+        inOut.seekp(0, fstream::end); // 将写标记移动到文件尾
+        inOut << cnt; // 输出累计的长度
+        // 如果不是最后一行，打印一个分隔符
+        if (mark != end_mark)
+            inOut << " ";
+        inOut.seekg(mark); // 恢复读位置
+    }
+    inOut.seekp(0, fstream::end); // 定位到文件尾
+    inOut << "\n";
+    return 0;
+}
+void revisit_io_lib() {
+    formatted_io();
+    //unformatted_io();
+    //random_access_stream();
 }
