@@ -326,4 +326,5 @@ add_executable(C___Primer main.cpp
         chapter_17/test_17_9.cpp
         chapter_17/test_17_10.cpp
         chapter_17/test_17_11.cpp
+        chapter_17/test_17_30.cpp
 )

@@ -8,6 +8,7 @@
 #include <tuple>
 #include <map>
 #include <numeric>
+#include <random>
 #include <regex>
 #include <vector>
 
@@ -20,11 +21,13 @@ using namespace std;
 void use_tuple();
 void use_bitset();
 void use_reg_exp();
+void use_rand();
 
 int main(int argc, char *argv[]) {
     //use_tuple();
     //use_bitset();
-    use_reg_exp();
+    //use_reg_exp();
+    use_rand();
 }
 
 void use_tuple() {
@@ -190,4 +193,61 @@ void use_reg_exp() {
     //reg_iterator();
     sub_expr();
     //reg_replace();
+}
+vector<unsigned> gen_rand_ivec(const size_t size) {
+    static default_random_engine e; // static是必须的，不然每次生成的都是一样的
+    static uniform_int_distribution<unsigned> u(0, 9);
+    //cout << e.min() << " " << e.max() << endl; // 1 2147483646
+    vector<unsigned> ret;
+
+    for (size_t i = 0; i < size; ++i)
+        ret.push_back(u(e));
+    return ret;
+}
+vector<double> gen_rand_fvec(const size_t size) {
+    static default_random_engine e; // static是必须的，不然每次生成的都是一样的
+    static uniform_real_distribution<> u(1, 2);
+    //cout << u.min() << " " << u.max() << endl; // 1 2
+    vector<double> ret;
+
+    for (size_t i = 0; i < size; ++i)
+        ret.push_back(u(e));
+    return ret;
+}
+void gen_normal_distribution() {
+    default_random_engine e;
+    normal_distribution<> n(4, 1.5); // 均值为4，标准差为1.5
+    vector<unsigned> vals(9); // 9个元素都为0
+    for (size_t i = 0; i != 200; ++i) {
+        if (const unsigned v = lround(n(e)); v < vals.size())
+            ++vals[v];
+    }
+    for (size_t j = 0; j != vals.size(); ++j)
+        cout << j << ": " << string(vals[j], '*') << endl;
+}
+void gen_bernoulli_distribution() {
+    string resp;
+    default_random_engine e;
+    bernoulli_distribution b; // 默认是50/50的机会
+    //bernoulli_distribution b(0.55); // 55/45的机会
+    do {
+        const bool first = b(e);
+        cout << (first ? "We go first" : "You get to go first") << endl;
+        // play...
+        cout << "play again? Enter 'yes' or 'no'" << endl;
+
+    } while (cin >> resp && resp[0] == 'y');
+}
+void use_rand() {
+    /*
+    const auto vec1 = gen_rand_ivec(20);
+    print_collection(vec1);
+    const auto vec2 = gen_rand_ivec(20);
+    print_collection(vec2);
+    const auto vec3 = gen_rand_fvec(10);
+    print_collection(vec3);
+    */
+
+    //gen_normal_distribution();
+    gen_bernoulli_distribution();
 }
