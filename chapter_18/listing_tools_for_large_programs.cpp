@@ -6,8 +6,14 @@
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
+namespace cplusplus_primer {
+    constexpr int count = 100;
+    /**/
+}
+namespace primer = cplusplus_primer;
 
+int main(int argc, char *argv[]) {
+    cout << primer::count << endl;
 }
 
 void manip() {
@@ -46,4 +52,33 @@ void customize_exception() {
             << "), right isbn(" << e.right << ")\n";
         }
     }
+}
+
+namespace A {
+    int i;
+    int k;
+    namespace B {
+        int i; // 在B中隐藏了A::i
+        int j;
+        int f1() {
+            int j; // j是f1的局部变量，隐藏了A::B::j
+            return i; // 返回B::i
+        }
+    }
+
+    int f2() {
+        //return j; // ❌ j未被定义
+    }
+    int j = i; // 用A::i进行初始化
+
+    class C1 {
+    public:
+        C1() : i(0), j(0) {}
+        int f1() {return k;} // 返回A::k
+        //int f2() {return h;} // ❌ h未定义
+        int f3();
+    private:
+        int i; // 隐藏了A::i
+        int j; // 隐藏了A::j
+    };
 }
