@@ -7,6 +7,23 @@
 #include <string>
 #include <utility>
 
+class out_of_stock final : public std::runtime_error {
+public:
+    explicit out_of_stock(const std::string &s)
+        : std::runtime_error(s) { }
+};
+
+class isbn_mismatch final : public std::logic_error {
+public:
+    explicit isbn_mismatch(const std::string &s)
+        : std::logic_error(s) { }
+    isbn_mismatch(const std::string &s, std::string lhs, std::string rhs)
+        : std::logic_error(s), left(std::move(lhs)), right(std::move(rhs)) { }
+
+public:
+    const std::string left, right;
+};
+
 class Sales_data {
     // friend
     friend Sales_data add(const Sales_data &, const Sales_data &);
@@ -71,6 +88,9 @@ inline Sales_data& Sales_data::operator=(const std::string &s) {
 }
 
 inline Sales_data& Sales_data::combine(const Sales_data &rhs) {
+    if (isbn() != rhs.isbn())
+        throw isbn_mismatch("wrong isbns", isbn(), rhs.isbn());
+
     units_sold += rhs.units_sold;
     revenue += rhs.revenue;
     return *this;

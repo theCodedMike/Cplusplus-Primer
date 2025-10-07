@@ -78,9 +78,11 @@ Blob<T>::Blob()
 }
 
 template<typename T>
-Blob<T>::Blob(std::initializer_list<T> il)
+Blob<T>::Blob(std::initializer_list<T> il) try // 假如初始值列表抛出异常
     : data(std::make_shared<std::vector<T>>(il)){
 
+} catch (const std::bad_alloc &e) {
+    //handle_out_of_memory(e);
 }
 
 template<typename T>
