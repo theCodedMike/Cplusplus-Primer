@@ -2,6 +2,8 @@
 // Created by lixia on 2025/10/7.
 //
 #include <iostream>
+#include <memory>
+
 #include "../include/Sales_data.h"
 
 using namespace std;
@@ -23,6 +25,7 @@ void manip() {
         // 处理异常的某些特殊操作
         throw; // 再往外抛
     }
+    // 没有finally
 }
 
 class Base {
@@ -82,3 +85,25 @@ namespace A {
         int j; // 隐藏了A::j
     };
 }
+
+struct Base1 {
+    Base1() = default;
+    Base1(const string &);
+    Base1(shared_ptr<int>);
+};
+struct Base2 {
+    Base2() = default;
+    Base2(const string &);
+    Base2(int);
+};
+struct D1 : public Base1, public Base2 {
+    using Base1::Base1; // 继承Base1的构造函数
+    using Base2::Base2; // 继承Base2的构造函数
+};
+struct D2 : public Base1, public Base2 {
+    using Base1::Base1; // 继承Base1的构造函数
+    using Base2::Base2; // 继承Base2的构造函数
+    // D2必须自定义一个接受string的构造函数
+    D2(const string &s) : Base1(s), Base2(s) {}
+    D2() = default;
+};

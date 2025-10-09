@@ -24,6 +24,8 @@ add_executable(C___Primer main.cpp
         include/StrVec.h
         include/Quote.h
         include/Blob.h
+        include/Animal.h
+        include/AnimalVirtualBase.h
 
         chapter_1/listing_io.cpp
         chapter_1/listing_comment.cpp
@@ -333,4 +335,6 @@ add_executable(C___Primer main.cpp
         chapter_18/test_18_2.cpp
         chapter_18/test_18_10.cpp
         chapter_18/test_18_16.cpp
+        chapter_18/test_18_28.cpp
+        chapter_18/test_18_29.cpp
 )
