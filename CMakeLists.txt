@@ -341,4 +341,8 @@ add_executable(C___Primer main.cpp
         chapter_19/listing_spec_tools_and_techs.cpp
         chapter_19/test_19_1.cpp
         chapter_19/test_19_10.cpp
+
+        other_cpp_version/cpp14.cpp
+        other_cpp_version/cpp17.cpp
+        other_cpp_version/cpp20.cpp
 )
