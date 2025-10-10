@@ -337,4 +337,8 @@ add_executable(C___Primer main.cpp
         chapter_18/test_18_16.cpp
         chapter_18/test_18_28.cpp
         chapter_18/test_18_29.cpp
+
+        chapter_19/listing_spec_tools_and_techs.cpp
+        chapter_19/test_19_1.cpp
+        chapter_19/test_19_10.cpp
 )
